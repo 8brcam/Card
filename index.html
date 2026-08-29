@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cueverse Player Card Generator</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: #1e293b;
+            --text-color: #f8fafc;
+            
+            /* High-fidelity EA Sports style geometric gradients */
+            --gold-gradient: linear-gradient(135deg, #ffe885 0%, #f3b12b 40%, #f9d976 60%, #b37d14 100%);
+            --silver-gradient: linear-gradient(135deg, #ffffff 0%, #b1bdcb 40%, #e2e8f0 70%, #64748b 100%);
+            --bronze-gradient: linear-gradient(135deg, #fbcfe8 0%, #ca8a04 40%, #fde047 70%, #78350f 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            background-color: var(--panel-bg);
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            max-width: 850px;
+            width: 100%;
+        }
+
+        /* --- IMMERSIVE FUT SHIELD ARCHITECTURE --- */
+        .card-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fut-card {
+            position: relative;
+            width: 270px;
+            height: 400px;
+            background: var(--gold-gradient);
+            color: #1a1508;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            display: flex;
+            flex-direction: column;
+            padding: 3px;
+            box-sizing: border-box;
+            transition: background 0.3s;
+            
+            /* Precision FIFA Shield Crest Cutout */
+            clip-path: polygon(0% 12%, 50% 0%, 100% 12%, 100% 75%, 50% 100%, 0% 75%);
+        }
+
+        /* Geometric Overlay Vector Lines */
+        .fut-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(30deg, transparent 40%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.15) 55%, transparent 60%),
+                        linear-gradient(-30deg, transparent 35%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.05) 50%, transparent 55%);
+            background-size: 100% 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.08);
+            clip-path: polygon(0% 12%, 50% 0%, 100% 12%, 100% 75%, 50% 100%, 0% 75%);
+            display: flex;
+            flex-direction: column;
+            padding: 25px 8px 12px 8px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        /* Top Structure: Badge Information (Left) alongside Avatar (Right) */
+        .card-top {
+            display: flex;
+            height: 140px;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .badge-ovr {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 32%;
+            padding-top: 15px;
+            border-right: 1px solid rgba(26, 21, 8, 0.15);
+        }
+
+        .ovr-txt {
+            font-size: 40px;
+            font-weight: 900;
+            line-height: 36px;
+            letter-spacing: -1px;
+        }
+
+        .pos-txt {
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .avatar-placeholder {
+            width: 68%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            padding-bottom: 2px;
+        }
+
+        .avatar-placeholder svg {
+            width: 85%;
+            height: auto;
+            max-height: 130px;
+        }
+
+        .player-name {
+            text-align: center;
+            font-size: 19px;
+            font-weight: 900;
+            text-transform: uppercase;
+            border-bottom: 1px solid rgba(26,21,8,0.2);
+            padding: 4px 0;
+            margin: 8px 15px 12px 15px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Fixed 3x2 Tight Stat Metric Box Layout */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 16px;
+            row-gap: 8px;
+            padding: 0 16px;
+            margin-bottom: 10px;
+            justify-content: center;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            font-size: 16px;
+            font-weight: 800;
+        }
+
+        .stat-val {
+            font-weight: 900;
+            min-width: 22px;
+            text-align: right;
+        }
+
+        .stat-label {
+            font-weight: 600;
+            font-size: 13px;
+            opacity: 0.75;
+            text-transform: uppercase;
+            min-width: 28px;
+            text-align: left;
+        }
+
+        /* --- INTERFACE CONTROLS PANEL --- */
+        .controls-panel {
+            flex: 1.2;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 24px;
+            border-bottom: 1px solid #475569;
+            padding-bottom: 8px;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #94a3b8;
+        }
+
+        input[type="text"], select {
+            background-color: #0f172a;
+            border: 1px solid #475569;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        input[type="range"] {
+            flex: 1;
+            accent-color: #f3b12b;
+            cursor: pointer;
+        }
+
+        .slider-val {
+            width: 30px;
+            text-align: right;
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+                align-items: center;
+            }
+            .controls-panel {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Centered Inbound FIFA Shield Layout -->
+    <div class="card-container">
+        <div class="fut-card" id="cardElement">
+            <div class="card-inner">
+                <div class="card-top">
+                    <!-- Left: OVR Column -->
+                    <div class="badge-ovr">
+                        <span class="ovr-txt" id="cardOvr">85</span>
+                        <span class="pos-txt">CUE</span>
+                    </div>
+                    <!-- Right: Inset Avatar Portrait -->
+                    <div class="avatar-placeholder">
+                        <svg viewBox="0 0 100 100" xmlns="http://w3.org">
+                            <circle cx="50" cy="50" r="38" fill="#15120a" />
+                            <circle cx="50" cy="50" r="16" fill="#fff" />
+                            <text x="50" y="56" font-family="Arial" font-size="16" font-weight="bold" fill="#15120a" text-anchor="middle">8</text>
+                        </svg>
+                    </div>
+                </div>
+                
+                <!-- Player Name Header -->
+                <div class="player-name" id="cardName">PLAYER NAME</div>
+                
+                <!-- Safety Grid Container: Locked Elements -->
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-val" id="cardAgg">85</span><span class="stat-label">AGG</span></div>
+                    <div class="stat-item"><span class="stat-val" id="cardCtr">85</span><span class="stat-label">CTR</span></div>
+                    <div class="stat-item"><span class="stat-val" id="cardSel">85</span><span class="stat-label">SEL</span></div>
+                    <div class="stat-item"><span class="stat-val" id="cardPot">85</span><span class="stat-label">POT</span></div>
+                    <div class="stat-item"><span class="stat-val" id="cardSaf">85</span><span class="stat-label">SAF</span></div>
+                    <div class="stat-item"><span class="stat-val" id="cardTem">85</span><span class="stat-label">TEM</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Generator Interface Panels -->
+    <div class="controls-panel">
+        <h2>Cueverse Card Editor</h2>
+        
+        <div class="input-group">
+            <label for="nameInput">Player Name</label>
+            <input type="text" id="nameInput" value="PLAYER NAME" maxlength="14">
+        </div>
+
+        <div class="input-group">
+            <label for="tierInput">Card Tier Theme</label>
+            <select id="tierInput">
+                <option value="gold">Gold Premium</option>
+                <option value="silver">Silver Premium</option>
+                <option value="bronze">Bronze Premium</option>
+            </select>
+        </div>
+
+        <!-- Metric Inputs -->
+        <div class="input-group">
+            <label for="aggInput">Aggression (AGG)</label>
+            <div class="slider-row">
+                <input type="range" id="aggInput" min="10" max="99" value="85">
+                <span class="slider-val" id="aggVal">85</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="selInput">Shot Selection (SEL)</label>
+            <div class="slider-row">
+                <input type="range" id="selInput" min="10" max="99" value="85">
+                <span class="slider-val" id="selVal">85</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="safInput">Safety (SAF)</label>
+            <div class="slider-row">
+                <input type="range" id="safInput" min="10" max="99" value="85">
+                <span class="slider-val" id="safVal">85</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="ctrInput">Control (CTR)</label>
+            <div class="slider-row">
+                <input type="range" id="ctrInput" min="10" max="99" value="85">
+                <span class="slider-val" id="ctrVal">85</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="potInput">Potting (POT)</label>
+            <div class="slider-row">
+                <input type="range" id="potInput" min="10" max="99" value="85">
+                <span class="slider-val" id="potVal">85</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="temInput">Temperament (TEM)</label>
+            <div class="slider-row">
+                <input type="range" id="temInput" min="10" max="99" value="85">
+                <span class="slider-val" id="temVal">85</span>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    // Component element definitions
+    const nameInput = document.getElementById('nameInput');
+    const tierInput = document.getElementById('tierInput');
+    const aggInput = document.getElementById('aggInput');
+    const selInput = document.getElementById('selInput');
+    const safInput = document.getElementById('safInput');
+    const ctrInput = document.getElementById('ctrInput');
+    const potInput = document.getElementById('potInput');
+    const temInput = document.getElementById('temInput');
+
+    const cardName = document.getElementById('cardName');
+    const cardElement = document.getElementById('cardElement');
+    const cardOvr = document.getElementById('cardOvr');
+    const cardAgg = document.getElementById('cardAgg');
+    const cardSel = document.getElementById('cardSel');
+    const cardSaf = document.getElementById('cardSaf');
+    const cardCtr = document.getElementById('cardCtr');
+    const cardPot = document.getElementById('cardPot');
+    const cardTem = document.getElementById('cardTem');
+
+    const aggVal = document.getElementById('aggVal');
+    const selVal = document.getElementById('selVal');
+    const safVal = document.getElementById('safVal');
+    const ctrVal = document.getElementById('ctrVal');
+    const potVal = document.getElementById('potVal');
+    const temVal = document.getElementById('temVal');
+
+    // Live mathematical calculation mapping
+    function updateOverall() {
+        const agg = parseInt(aggInput.value) || 0;
+        const sel = parseInt(selInput.value) || 0;
+        const saf = parseInt(safInput.value) || 0;
+        const ctr = parseInt(ctrInput.value) || 0;
+        const pot = parseInt(potInput.value) || 0;
+        const tem = parseInt(temInput.value) || 0;
+        
+        const average = Math.round((agg + sel + saf + ctr + pot + tem) / 6);
+        cardOvr.textContent = average;
+    }
+
+    // Main layout renderer pipeline
+    function updateCard() {
+        cardName.textContent = nameInput.value || "PLAYER NAME";
+        
+        cardAgg.textContent = aggInput.value;
+        aggVal.textContent = aggInput.value;
+        
+        cardSel.textContent = selInput.value;
+        selVal.textContent = selInput.value;
+        
+        cardSaf.textContent = safInput.value;
+        safVal.textContent = safInput.value;
+        
+        cardCtr.textContent = ctrInput.value;
+        ctrVal.textContent = ctrInput.value;
+        
+        cardPot.textContent = potInput.value;
+        potVal.textContent = potInput.value;
+        
+        cardTem.textContent = temInput.value;
+        temVal.textContent = temInput.value;
+
+        // Visual theme adjustment engine
+        if (tierInput.value === 'gold') {
+            cardElement.style.background = 'var(--gold-gradient)';
+            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#f3b12b');
+        } else if (tierInput.value === 'silver') {
+            cardElement.style.background = 'var(--silver-gradient)';
+            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#64748b');
+        } else if (tierInput.value === 'bronze') {
+            cardElement.style.background = 'var(--bronze-gradient)';
+            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#ca8a04');
+        }
+
+        updateOverall();
+    }
+
+    // Input monitoring framework initialization
+    nameInput.addEventListener('input', updateCard);
+    tierInput.addEventListener('change', updateCard);
+    aggInput.addEventListener('input', updateCard);
+    selInput.addEventListener('input', updateCard);
+    safInput.addEventListener('input', updateCard);
+    ctrInput.addEventListener('input', updateCard);
+    potInput.addEventListener('input', updateCard);
+    temInput.addEventListener('input', updateCard);
+
+    // Initial page load rendering trigger
+    updateCard();
+</script>
+
+</body>
+</html>
