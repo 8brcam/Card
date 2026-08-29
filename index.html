@@ -78,7 +78,6 @@
         /* Interactive subtle tilt hover zoom effect */
         .fut-card:hover {
             transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 40px 75px rgba(0,0,0,0.9), 0 0 50px rgba(220, 160, 33, 0.5);
         }
 
         /* Holographic front sheen line highlight layer */
@@ -240,7 +239,7 @@
             flex-direction: column;
             gap: 14px;
             width: 320px;
-            border-left: 1px solid #1e293b;
+            border-left: 1px solid #334155;
             padding-left: 30px;
         }
 
@@ -322,6 +321,11 @@
                 width: 100%;
                 border-left: none;
                 border-top: 1px solid #334155;
+                padding-left: 0;
+                padding-top: 20px;
+            }
+        }
+    </style>
 <body>
 
 <div class="container">
@@ -506,6 +510,7 @@
     // --- SECRET URL VISIBILITY ENGINE ---
     function checkUrlPermissions() {
         const urlParams = new URLSearchParams(window.location.search);
+        // If your link has ?edit=true, show the panel. Otherwise leave it hidden.
         if (urlParams.get('edit') === 'true') {
             adminPanel.style.display = 'flex';
         } else {
@@ -539,7 +544,6 @@
         const average = Math.round((agg + ctr + sel + pot + saf + tem) / 6);
         cardOvr.textContent = average;
     }
-
     // Main layout renderer pipeline with Dynamic Neon Shadow Control
     function updateCard() {
         cardName.textContent = nameInput.value || "PLAYER NAME";
@@ -583,14 +587,17 @@
 
     // --- SNAPSHOT DEPLOYMENT EXPORTER ---
     function generateBakedCode() {
+        const stylesBlock = document.getElementsByTagName('style')[0].outerHTML;
+        const scriptsBlock = document.getElementsByTagName('script')[0].outerHTML;
         const activeAvatarGraphic = avatarContainer.innerHTML.trim();
+        
         const bakedHtmlPage = `<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cueverse Player Card Showcase</title>
-    ${document.getElementsByTagName('style')[0].outerHTML}
+    ${stylesBlock}
 </head>
 <body>
 <div class="container">
@@ -622,7 +629,7 @@
         ${adminPanel.innerHTML}
     </div>
 </div>
-${document.getElementsByTagName('script')[0].outerHTML}
+${scriptsBlock}
 </body>
 </html>`;
 
