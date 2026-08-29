@@ -3,21 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cueverse Player Card Generator</title>
+    <title>Cueverse Premium Player Card Showcase</title>
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --panel-bg: #1e293b;
+            --bg-color: #03050a;
+            --panel-bg: #0f172a;
             --text-color: #f8fafc;
             
-            /* High-fidelity EA Sports style geometric gradients */
-            --gold-gradient: linear-gradient(135deg, #ffe885 0%, #f3b12b 40%, #f9d976 60%, #b37d14 100%);
-            --silver-gradient: linear-gradient(135deg, #ffffff 0%, #b1bdcb 40%, #e2e8f0 70%, #64748b 100%);
-            --bronze-gradient: linear-gradient(135deg, #fbcfe8 0%, #ca8a04 40%, #fde047 70%, #78350f 100%);
+            /* Enhanced Hyper-Reflective Metallic Gradients */
+            --fc-gold-base: linear-gradient(145deg, #ffe57f 0%, #dca021 45%, #fcd34d 55%, #603b01 100%);
+            --fc-silver-base: linear-gradient(145deg, #ffffff 0%, #94a3b8 45%, #cbd5e1 55%, #1e293b 100%);
+            --fc-bronze-base: linear-gradient(145deg, #ffedd5 0%, #b45309 45%, #fed7aa 55%, #431407 100%);
+            
+            /* Dynamic Theme Back-Glow Shadows */
+            --gold-glow: 0 0 35px rgba(220, 160, 33, 0.4), 0 0 15px rgba(220, 160, 33, 0.2);
+            --silver-glow: 0 0 35px rgba(148, 163, 184, 0.35), 0 0 15px rgba(148, 163, 184, 0.15);
+            --bronze-glow: 0 0 35px rgba(180, 83, 9, 0.4), 0 0 15px rgba(180, 83, 9, 0.2);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            font-family: "Arial Black", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
@@ -33,14 +38,16 @@
             flex-direction: row;
             gap: 40px;
             background-color: var(--panel-bg);
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            max-width: 850px;
-            width: 100%;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            max-width: 880px;
+            width: auto;
+            transition: all 0.3s ease;
         }
 
-        /* --- IMMERSIVE FUT SHIELD ARCHITECTURE --- */
+        /* --- THE PREMIUM SHIELD ARCHITECTURE --- */
         .card-container {
             flex: 1;
             display: flex;
@@ -50,50 +57,62 @@
 
         .fut-card {
             position: relative;
-            width: 270px;
-            height: 400px;
-            background: var(--gold-gradient);
-            color: #1a1508;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            width: 275px;
+            height: 395px;
+            background: var(--fc-gold-base);
+            color: #080602;
+            
+            /* High-contrast multi-layered drop shadow and neon back-glow combo */
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8), var(--gold-glow);
+            
             display: flex;
             flex-direction: column;
-            padding: 3px;
+            padding: 4px;
             box-sizing: border-box;
-            transition: background 0.3s;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             
-            /* Precision FIFA Shield Crest Cutout */
-            clip-path: polygon(0% 12%, 50% 0%, 100% 12%, 100% 75%, 50% 100%, 0% 75%);
+            /* Refined, modern shield geometry shape cutout */
+            clip-path: polygon(0% 12%, 18% 4%, 50% 0%, 82% 4%, 100% 12%, 100% 76%, 50% 100%, 0% 76%);
         }
 
-        /* Geometric Overlay Vector Lines */
+        /* Interactive subtle tilt hover zoom effect */
+        .fut-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 40px 75px rgba(0,0,0,0.9), 0 0 50px rgba(220, 160, 33, 0.5);
+        }
+
+        /* Holographic front sheen line highlight layer */
         .fut-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(30deg, transparent 40%, rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.15) 55%, transparent 60%),
-                        linear-gradient(-30deg, transparent 35%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.05) 50%, transparent 55%);
-            background-size: 100% 100%;
+            top: -50%; left: -50%; right: -50%; bottom: -50%;
+            background: linear-gradient(115deg, transparent 40%, rgba(255,255,255,0.22) 47%, rgba(255,255,255,0.05) 50%, transparent 58%);
             pointer-events: none;
-            z-index: 1;
+            z-index: 3;
+            transform: rotate(0deg);
         }
 
         .card-inner {
             position: relative;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.08);
-            clip-path: polygon(0% 12%, 50% 0%, 100% 12%, 100% 75%, 50% 100%, 0% 75%);
+            
+            /* Elegant frosted inset layer inside the border */
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(0, 0, 0, 0.05) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            
+            clip-path: polygon(0% 12%, 18% 4%, 50% 0%, 82% 4%, 100% 12%, 100% 76%, 50% 100%, 0% 76%);
             display: flex;
             flex-direction: column;
-            padding: 25px 8px 12px 8px;
+            padding: 28px 10px 15px 10px;
             box-sizing: border-box;
             z-index: 2;
         }
 
-        /* Top Structure: Badge Information (Left) alongside Avatar (Right) */
+        /* Top Module: Vertical Left Control Deck & Player Silhouette Portrait */
         .card-top {
             display: flex;
-            height: 140px;
+            height: 155px;
             width: 100%;
             margin-top: 10px;
         }
@@ -103,98 +122,133 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
-            width: 32%;
-            padding-top: 15px;
-            border-right: 1px solid rgba(26, 21, 8, 0.15);
+            width: 25%;
+            gap: 2px;
+            padding-top: 5px;
+            border-right: 1px solid rgba(0, 0, 0, 0.12);
         }
 
         .ovr-txt {
-            font-size: 40px;
+            font-size: 46px;
             font-weight: 900;
-            line-height: 36px;
-            letter-spacing: -1px;
+            line-height: 38px;
+            letter-spacing: -2px;
+            color: #000;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.3);
         }
 
         .pos-txt {
-            font-size: 12px;
-            font-weight: 800;
+            font-size: 13px;
+            font-weight: 900;
             text-transform: uppercase;
+            color: #1a1303;
             letter-spacing: 0.5px;
+        }
+
+        .flag-img {
+            width: 26px;
+            height: 16px;
+            object-fit: cover;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+            margin: 4px 0;
+            border-radius: 2px;
+        }
+
+        .club-icon {
+            width: 22px;
+            height: 22px;
+            opacity: 0.9;
             margin-top: 2px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
         }
 
         .avatar-placeholder {
-            width: 68%;
+            width: 75%;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            padding-bottom: 2px;
+            overflow: hidden;
+            position: relative;
         }
 
-        .avatar-placeholder svg {
-            width: 85%;
+        /* High-contrast drop shadow on portrait image silhouettes */
+        .avatar-placeholder svg, .avatar-placeholder img {
+            width: 90%;
             height: auto;
-            max-height: 130px;
+            max-height: 135px;
+            object-fit: contain;
+            object-position: bottom center;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.4));
         }
 
         .player-name {
             text-align: center;
-            font-size: 19px;
+            font-size: 21px;
             font-weight: 900;
             text-transform: uppercase;
-            border-bottom: 1px solid rgba(26,21,8,0.2);
-            padding: 4px 0;
-            margin: 8px 15px 12px 15px;
-            letter-spacing: 0.5px;
+            padding: 3px 0;
+            margin: 10px 10px 15px 10px;
+            letter-spacing: -0.5px;
+            color: #000;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.2);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
         }
 
-        /* Fixed 3x2 Tight Stat Metric Box Layout */
+        /* Single Straight Horizontal Row Stat Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            column-gap: 16px;
-            row-gap: 8px;
-            padding: 0 16px;
-            margin-bottom: 10px;
+            grid-template-columns: repeat(6, 1fr);
+            padding: 0 2px;
+            margin-top: 6px;
             justify-content: center;
+            align-items: center;
         }
 
         .stat-item {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            font-size: 16px;
-            font-weight: 800;
+            line-height: 1.2;
+            border-right: 1px solid rgba(0, 0, 0, 0.1);
         }
 
-        .stat-val {
-            font-weight: 900;
-            min-width: 22px;
-            text-align: right;
+        .stat-item:last-child {
+            border-right: none;
         }
 
         .stat-label {
-            font-weight: 600;
-            font-size: 13px;
-            opacity: 0.75;
+            font-size: 11px;
+            font-weight: 800;
+            color: #241a05;
+            opacity: 0.8;
             text-transform: uppercase;
-            min-width: 28px;
-            text-align: left;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
         }
 
-        /* --- INTERFACE CONTROLS PANEL --- */
+        .stat-val {
+            font-size: 18px;
+            font-weight: 900;
+            color: #000;
+        }
+
+        /* --- SECRET CONTROLS PANEL --- */
         .controls-panel {
-            flex: 1.2;
-            display: flex;
+            display: none;
             flex-direction: column;
             gap: 14px;
+            width: 320px;
+            border-left: 1px solid #1e293b;
+            padding-left: 30px;
         }
 
         h2 {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             margin-top: 0;
             font-size: 24px;
-            border-bottom: 1px solid #475569;
+            border-bottom: 1px solid #334155;
             padding-bottom: 8px;
         }
 
@@ -205,19 +259,38 @@
         }
 
         label {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             font-size: 13px;
             font-weight: 600;
             color: #94a3b8;
         }
 
-        input[type="text"], select {
-            background-color: #0f172a;
-            border: 1px solid #475569;
+        input[type="text"], select, textarea {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #020617;
+            border: 1px solid #334155;
             color: #fff;
             padding: 8px 12px;
             border-radius: 6px;
             font-size: 15px;
             outline: none;
+        }
+
+        .btn-upload {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+            color: white;
+            border: none;
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            transition: opacity 0.2s;
+        }
+
+        .btn-upload:hover {
+            opacity: 0.9;
         }
 
         .slider-row {
@@ -228,11 +301,12 @@
 
         input[type="range"] {
             flex: 1;
-            accent-color: #f3b12b;
+            accent-color: #dca021;
             cursor: pointer;
         }
 
         .slider-val {
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
             width: 30px;
             text-align: right;
             font-weight: 700;
@@ -246,56 +320,82 @@
             }
             .controls-panel {
                 width: 100%;
-            }
-        }
-    </style>
-</head>
+                border-left: none;
+                border-top: 1px solid #334155;
 <body>
 
 <div class="container">
-    <!-- Centered Inbound FIFA Shield Layout -->
+    <!-- Single Horizontal Row Card Container -->
     <div class="card-container">
         <div class="fut-card" id="cardElement">
             <div class="card-inner">
                 <div class="card-top">
-                    <!-- Left: OVR Column -->
+                    <!-- Left-Aligned Control Deck Header Column -->
                     <div class="badge-ovr">
                         <span class="ovr-txt" id="cardOvr">85</span>
                         <span class="pos-txt">CUE</span>
+                        <!-- Dynamic Flag Image Slot -->
+                        <img src="https://flagcdn.com" class="flag-img" id="cardFlag" alt="Country Flag">
+                        <!-- Custom Game Badge Emblem -->
+                        <svg class="club-icon" viewBox="0 0 100 100" xmlns="http://w3.org">
+                            <circle cx="50" cy="50" r="45" fill="#000"/>
+                            <circle cx="50" cy="50" r="20" fill="#fff"/>
+                        </svg>
                     </div>
-                    <!-- Right: Inset Avatar Portrait -->
-                    <div class="avatar-placeholder">
+                    <!-- Right Profile Silhouette Canvas -->
+                    <div class="avatar-placeholder" id="avatarPlaceholder">
                         <svg viewBox="0 0 100 100" xmlns="http://w3.org">
-                            <circle cx="50" cy="50" r="38" fill="#15120a" />
-                            <circle cx="50" cy="50" r="16" fill="#fff" />
-                            <text x="50" y="56" font-family="Arial" font-size="16" font-weight="bold" fill="#15120a" text-anchor="middle">8</text>
+                            <path d="M50,90 C30,90 20,75 20,60 C20,40 30,20 50,20 C70,20 80,40 80,60 C80,75 70,90 50,90 Z" fill="#111" opacity="0.85"/>
+                            <circle cx="50" cy="40" r="18" fill="#111" opacity="0.85"/>
                         </svg>
                     </div>
                 </div>
                 
-                <!-- Player Name Header -->
+                <!-- Player Name Core Banner -->
                 <div class="player-name" id="cardName">PLAYER NAME</div>
                 
-                <!-- Safety Grid Container: Locked Elements -->
+                <!-- Single Straight Horizontal Row (No Vertical Stacking) -->
                 <div class="stats-grid">
-                    <div class="stat-item"><span class="stat-val" id="cardAgg">85</span><span class="stat-label">AGG</span></div>
-                    <div class="stat-item"><span class="stat-val" id="cardCtr">85</span><span class="stat-label">CTR</span></div>
-                    <div class="stat-item"><span class="stat-val" id="cardSel">85</span><span class="stat-label">SEL</span></div>
-                    <div class="stat-item"><span class="stat-val" id="cardPot">85</span><span class="stat-label">POT</span></div>
-                    <div class="stat-item"><span class="stat-val" id="cardSaf">85</span><span class="stat-label">SAF</span></div>
-                    <div class="stat-item"><span class="stat-val" id="cardTem">85</span><span class="stat-label">TEM</span></div>
+                    <div class="stat-item"><span class="stat-label">AGG</span><span class="stat-val" id="cardAgg">85</span></div>
+                    <div class="stat-item"><span class="stat-label">CTR</span><span class="stat-val" id="cardCtr">85</span></div>
+                    <div class="stat-item"><span class="stat-label">SEL</span><span class="stat-val" id="cardSel">85</span></div>
+                    <div class="stat-item"><span class="stat-label">POT</span><span class="stat-val" id="cardPot">85</span></div>
+                    <div class="stat-item"><span class="stat-label">SAF</span><span class="stat-val" id="cardSaf">85</span></div>
+                    <div class="stat-item"><span class="stat-label">TEM</span><span class="stat-val" id="cardTem">85</span></div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Generator Interface Panels -->
-    <div class="controls-panel">
+    <!-- Generator Interface Panels (Secret Admin Section) -->
+    <div class="controls-panel" id="adminPanel">
         <h2>Cueverse Card Editor</h2>
         
         <div class="input-group">
             <label for="nameInput">Player Name</label>
             <input type="text" id="nameInput" value="PLAYER NAME" maxlength="14">
+        </div>
+
+        <div class="input-group">
+            <label>Player Portrait Picture</label>
+            <button class="btn-upload" style="background-color: #2563eb;" onclick="document.getElementById('imageLoader').click()">Choose Image File</button>
+            <input type="file" id="imageLoader" accept="image/*" style="display: none;">
+        </div>
+
+        <div class="input-group">
+            <label for="countryInput">Player Nationality</label>
+            <select id="countryInput">
+                <option value="gb">United Kingdom</option>
+                <option value="us">United States</option>
+                <option value="br">Brazil</option>
+                <option value="de">Germany</option>
+                <option value="fr">France</option>
+                <option value="es">Spain</option>
+                <option value="cn">China</option>
+                <option value="jp">Japan</option>
+                <option value="ca">Canada</option>
+                <option value="au">Australia</option>
+            </select>
         </div>
 
         <div class="input-group">
@@ -307,28 +407,12 @@
             </select>
         </div>
 
-        <!-- Metric Inputs -->
+        <!-- Metric Sliders -->
         <div class="input-group">
             <label for="aggInput">Aggression (AGG)</label>
             <div class="slider-row">
                 <input type="range" id="aggInput" min="10" max="99" value="85">
                 <span class="slider-val" id="aggVal">85</span>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label for="selInput">Shot Selection (SEL)</label>
-            <div class="slider-row">
-                <input type="range" id="selInput" min="10" max="99" value="85">
-                <span class="slider-val" id="selVal">85</span>
-            </div>
-        </div>
-
-        <div class="input-group">
-            <label for="safInput">Safety (SAF)</label>
-            <div class="slider-row">
-                <input type="range" id="safInput" min="10" max="99" value="85">
-                <span class="slider-val" id="safVal">85</span>
             </div>
         </div>
 
@@ -341,10 +425,26 @@
         </div>
 
         <div class="input-group">
+            <label for="selInput">Shot Selection (SEL)</label>
+            <div class="slider-row">
+                <input type="range" id="selInput" min="10" max="99" value="85">
+                <span class="slider-val" id="selVal">85</span>
+            </div>
+        </div>
+
+        <div class="input-group">
             <label for="potInput">Potting (POT)</label>
             <div class="slider-row">
                 <input type="range" id="potInput" min="10" max="99" value="85">
                 <span class="slider-val" id="potVal">85</span>
+            </div>
+        </div>
+
+        <div class="input-group">
+            <label for="safInput">Safety (SAF)</label>
+            <div class="slider-row">
+                <input type="range" id="safInput" min="10" max="99" value="85">
+                <span class="slider-val" id="safVal">85</span>
             </div>
         </div>
 
@@ -355,97 +455,195 @@
                 <span class="slider-val" id="temVal">85</span>
             </div>
         </div>
+
+        <!-- Export Deployment Block -->
+        <div class="input-group" style="margin-top: 10px; border-top: 1px solid #334155; padding-top: 15px;">
+            <button class="btn-upload" style="background-color: #10b981;" onclick="generateBakedCode()">Get Deployment Code</button>
+        </div>
+        
+        <!-- Output Code Box Window Display -->
+        <div class="input-group" id="outputArea" style="display: none; margin-top: 10px;">
+            <label>Copy this text and paste it to your index.html file:</label>
+            <textarea id="codeBox" rows="6" style="font-family: monospace; font-size: 11px;" readonly></textarea>
+        </div>
     </div>
 </div>
 <script>
-    // Component element definitions
+    // Map input components
     const nameInput = document.getElementById('nameInput');
+    const countryInput = document.getElementById('countryInput');
     const tierInput = document.getElementById('tierInput');
     const aggInput = document.getElementById('aggInput');
-    const selInput = document.getElementById('selInput');
-    const safInput = document.getElementById('safInput');
     const ctrInput = document.getElementById('ctrInput');
+    const selInput = document.getElementById('selInput');
     const potInput = document.getElementById('potInput');
+    const safInput = document.getElementById('safInput');
     const temInput = document.getElementById('temInput');
+    const imageLoader = document.getElementById('imageLoader');
+    const adminPanel = document.getElementById('adminPanel');
 
+    // Map card display items
     const cardName = document.getElementById('cardName');
+    const cardFlag = document.getElementById('cardFlag');
     const cardElement = document.getElementById('cardElement');
+    const avatarContainer = document.getElementById('avatarPlaceholder');
+    
     const cardOvr = document.getElementById('cardOvr');
     const cardAgg = document.getElementById('cardAgg');
-    const cardSel = document.getElementById('cardSel');
-    const cardSaf = document.getElementById('cardSaf');
     const cardCtr = document.getElementById('cardCtr');
+    const cardSel = document.getElementById('cardSel');
     const cardPot = document.getElementById('cardPot');
+    const cardSaf = document.getElementById('cardSaf');
     const cardTem = document.getElementById('cardTem');
 
     const aggVal = document.getElementById('aggVal');
-    const selVal = document.getElementById('selVal');
-    const safVal = document.getElementById('safVal');
     const ctrVal = document.getElementById('ctrVal');
+    const selVal = document.getElementById('selVal');
     const potVal = document.getElementById('potVal');
+    const safVal = document.getElementById('safVal');
     const temVal = document.getElementById('temVal');
+
+    // --- SECRET URL VISIBILITY ENGINE ---
+    function checkUrlPermissions() {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('edit') === 'true') {
+            adminPanel.style.display = 'flex';
+        } else {
+            adminPanel.style.display = 'none';
+        }
+    }
+
+    // Image Upload Engine Logic
+    imageLoader.addEventListener('change', function(e) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            avatarContainer.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = event.target.result;
+            avatarContainer.appendChild(img);
+        }
+        if(e.target.files && e.target.files[0]) {
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
 
     // Live mathematical calculation mapping
     function updateOverall() {
         const agg = parseInt(aggInput.value) || 0;
-        const sel = parseInt(selInput.value) || 0;
-        const saf = parseInt(safInput.value) || 0;
         const ctr = parseInt(ctrInput.value) || 0;
+        const sel = parseInt(selInput.value) || 0;
         const pot = parseInt(potInput.value) || 0;
+        const saf = parseInt(safInput.value) || 0;
         const tem = parseInt(temInput.value) || 0;
         
-        const average = Math.round((agg + sel + saf + ctr + pot + tem) / 6);
+        const average = Math.round((agg + ctr + sel + pot + saf + tem) / 6);
         cardOvr.textContent = average;
     }
 
-    // Main layout renderer pipeline
+    // Main layout renderer pipeline with Dynamic Neon Shadow Control
     function updateCard() {
         cardName.textContent = nameInput.value || "PLAYER NAME";
+        cardFlag.src = `https://flagcdn.com{countryInput.value}.png`;
         
         cardAgg.textContent = aggInput.value;
         aggVal.textContent = aggInput.value;
         
-        cardSel.textContent = selInput.value;
-        selVal.textContent = selInput.value;
-        
-        cardSaf.textContent = safInput.value;
-        safVal.textContent = safInput.value;
-        
         cardCtr.textContent = ctrInput.value;
         ctrVal.textContent = ctrInput.value;
+        
+        cardSel.textContent = selInput.value;
+        selVal.textContent = selInput.value;
         
         cardPot.textContent = potInput.value;
         potVal.textContent = potInput.value;
         
+        cardSaf.textContent = safInput.value;
+        safVal.textContent = safInput.value;
+        
         cardTem.textContent = temInput.value;
         temVal.textContent = temInput.value;
 
-        // Visual theme adjustment engine
+        // Visual tier theme and dynamic shadow glow adjustment
         if (tierInput.value === 'gold') {
-            cardElement.style.background = 'var(--gold-gradient)';
-            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#f3b12b');
+            cardElement.style.background = 'var(--fc-gold-base)';
+            cardElement.style.boxShadow = '0 30px 60px rgba(0,0,0,0.8), var(--gold-glow)';
+            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#dca021');
         } else if (tierInput.value === 'silver') {
-            cardElement.style.background = 'var(--silver-gradient)';
+            cardElement.style.background = 'var(--fc-silver-base)';
+            cardElement.style.boxShadow = '0 30px 60px rgba(0,0,0,0.8), var(--silver-glow)';
             document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#64748b');
         } else if (tierInput.value === 'bronze') {
-            cardElement.style.background = 'var(--bronze-gradient)';
-            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#ca8a04');
+            cardElement.style.background = 'var(--fc-bronze-base)';
+            cardElement.style.boxShadow = '0 30px 60px rgba(0,0,0,0.8), var(--bronze-glow)';
+            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#b45309');
         }
 
         updateOverall();
     }
 
-    // Input monitoring framework initialization
+    // --- SNAPSHOT DEPLOYMENT EXPORTER ---
+    function generateBakedCode() {
+        const activeAvatarGraphic = avatarContainer.innerHTML.trim();
+        const bakedHtmlPage = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cueverse Player Card Showcase</title>
+    ${document.getElementsByTagName('style')[0].outerHTML}
+</head>
+<body>
+<div class="container">
+    <div class="card-container">
+        <div class="fut-card" id="cardElement" style="background: ${cardElement.style.background}; box-shadow: ${cardElement.style.boxShadow};">
+            <div class="card-inner">
+                <div class="card-top">
+                    <div class="badge-ovr">
+                        <span class="ovr-txt">${cardOvr.textContent}</span>
+                        <span class="pos-txt">CUE</span>
+                        <img src="${cardFlag.src}" class="flag-img">
+                        <svg class="club-icon" viewBox="0 0 100 100" xmlns="http://w3.org"><circle cx="50" cy="50" r="45" fill="#000"/><circle cx="50" cy="50" r="20" fill="#fff"/></svg>
+                    </div>
+                    <div class="avatar-placeholder" id="avatarPlaceholder">${activeAvatarGraphic}</div>
+                </div>
+                <div class="player-name">${cardName.textContent}</div>
+                <div class="stats-grid">
+                    <div class="stat-item"><span class="stat-label">AGG</span><span class="stat-val">${cardAgg.textContent}</span></div>
+                    <div class="stat-item"><span class="stat-label">CTR</span><span class="stat-val">${cardCtr.textContent}</span></div>
+                    <div class="stat-item"><span class="stat-label">SEL</span><span class="stat-val">${cardSel.textContent}</span></div>
+                    <div class="stat-item"><span class="stat-label">POT</span><span class="stat-val">${cardPot.textContent}</span></div>
+                    <div class="stat-item"><span class="stat-label">SAF</span><span class="stat-val">${cardSaf.textContent}</span></div>
+                    <div class="stat-item"><span class="stat-label">TEM</span><span class="stat-val">${cardTem.textContent}</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="controls-panel" id="adminPanel" style="display: none;">
+        ${adminPanel.innerHTML}
+    </div>
+</div>
+${document.getElementsByTagName('script')[0].outerHTML}
+</body>
+</html>`;
+
+        document.getElementById('codeBox').value = bakedHtmlPage;
+        document.getElementById('outputArea').style.display = 'block';
+        document.getElementById('codeBox').select();
+    }
+
+    // Input monitoring tracking listeners
     nameInput.addEventListener('input', updateCard);
+    countryInput.addEventListener('change', updateCard);
     tierInput.addEventListener('change', updateCard);
     aggInput.addEventListener('input', updateCard);
-    selInput.addEventListener('input', updateCard);
-    safInput.addEventListener('input', updateCard);
     ctrInput.addEventListener('input', updateCard);
+    selInput.addEventListener('input', updateCard);
     potInput.addEventListener('input', updateCard);
+    safInput.addEventListener('input', updateCard);
     temInput.addEventListener('input', updateCard);
 
-    // Initial page load rendering trigger
+    // Initial page load triggers
+    checkUrlPermissions();
     updateCard();
 </script>
 
