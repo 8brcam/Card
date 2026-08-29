@@ -9,16 +9,11 @@
             --bg-color: #02040a;
             --panel-bg: #0b0f19;
             --text-color: #f8fafc;
+            --card-text: #050401;
             
-            /* High-fidelity ultimate team style base gradients */
-            --fc-card-base: linear-gradient(180deg, #ffd700 0%, #dca021 100%);
-            
-            /* Dynamic isolated stats box dark overlay palette variables */
-            --stat-dark-overlay: #85610d;
-            
-            /* Hyper-Vibrant Moving Blue Neon Border Palette */
-            --neon-blue-glow: 0 0 25px rgba(0, 229, 255, 0.6), 0 0 10px rgba(0, 102, 255, 0.4);
-            --neon-blue-gradient: linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #00f0ff 100%);
+            /* Symmetrical dark gold panel interior with crisp borders */
+            --stat-box-border: #946f02;
+            --stat-panel-bg: rgba(30, 20, 1, 0.75); 
         }
 
         body {
@@ -46,70 +41,76 @@
             width: auto;
             transition: all 0.3s ease;
         }
-
         /* --- THE EVEN SHIELD ARCHITECTURE --- */
         .card-container {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
+            perspective: 1500px; 
         }
 
-        /* Perfectly Symmetrical and Even Shield Frame Wrapper holding the Moving Neon border aura */
         .neon-border-wrapper {
             position: relative;
             width: 278px;
             height: 398px;
-            background: var(--neon-blue-gradient);
+            background: linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #00f0ff 100%);
             background-size: 200% 200%;
-            box-shadow: var(--neon-blue-glow);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: center;
             align-items: center;
             animation: neonPulse 4s linear infinite;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             
-            /* Enhanced, perfectly balanced symmetrical cutout geometry */
-            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 74%, 50% 100%, 0% 74%);
+            transform-style: preserve-3d;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 88%, 50% 100%, 0% 88%);
         }
 
         .neon-border-wrapper:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 0 40px rgba(0, 229, 255, 0.8), 0 0 20px rgba(0, 102, 255, 0.6);
+            transform: scale(1.14) rotateX(10deg) rotateY(-5deg);
+            box-shadow: 0 30px 70px rgba(0, 229, 255, 0.5), 0 15px 30px rgba(0, 102, 255, 0.4);
         }
-        /* Symmetrical card body container styled cleanly inside the border wrapper */
+
         .fut-card {
             position: relative;
-            width: 272px; /* 3px thin inset to allow the neon line to show evenly */
+            width: 272px; 
             height: 392px;
-            background: var(--fc-card-base); /* Dynamic: Changes colors for Gold, Silver, Bronze */
-            color: #080602;
             display: flex;
             flex-direction: column;
             padding: 3px;
             box-sizing: border-box;
-            transition: background 0.3s;
             z-index: 2;
-            
-            /* Symmetrical cutout geometry matching the outer wrapper */
-            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 74%, 50% 100%, 0% 74%);
+            transform: translateZ(35px); 
+            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 88%, 50% 100%, 0% 88%);
         }
 
+        @keyframes neonPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
         .card-inner {
             position: relative;
             width: 100%;
             height: 100%;
             
-            /* CONTINUOUS MATRIX: Wing lines flow seamlessly up and down the card background */
-            background: radial-gradient(ellipse 140% 100% at 50% 105%, transparent 35%, rgba(0,0,0,0.18) 37%, rgba(255,255,255,0.08) 38%, transparent 40%),
-                        radial-gradient(ellipse 170% 120% at 50% 110%, transparent 42%, rgba(0,0,0,0.15) 44%, rgba(255,255,255,0.06) 45%, transparent 47%),
-                        radial-gradient(ellipse 200% 140% at 50% 115%, transparent 49%, rgba(0,0,0,0.12) 51%, rgba(255,255,255,0.05) 52%, transparent 54%),
-                        radial-gradient(ellipse 230% 160% at 50% 120%, transparent 56%, rgba(0,0,0,0.09) 58%, rgba(255,255,255,0.04) 59%, transparent 61%),
-                        radial-gradient(ellipse 260% 180% at 50% 125%, transparent 63%, rgba(0,0,0,0.06) 65%, rgba(255,255,255,0.03) 66%, transparent 68%),
-                        radial-gradient(circle at 50% 100%, rgba(255,255,255,0.15) 0%, transparent 90%);
+            /* RE-BLENDED BACKDROP: Shifting from intense bright gold down to deep dark gold at the bottom */
+            background-image: 
+                linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 45%),
+                linear-gradient(225deg, rgba(0,0,0,0.35) 0%, transparent 55%),
+                conic-gradient(from 145deg at 75% 25%, #cfa81f 0deg, #ffd952 50deg, #594202 120deg, transparent 190deg),
+                conic-gradient(from 215deg at 35% 65%, #b59210 0deg, #402e01 80deg, #ffeba3 140deg, transparent 220deg),
+                conic-gradient(from 55deg at 85% 50%, #9e7a0d 0deg, #fff085 60deg, #302200 140deg, transparent 200deg),
+                conic-gradient(from 290deg at 20% 30%, #302200 0deg, #ebd05b 70deg, #876707 150deg, transparent 230deg),
+                
+                /* This base gradient forces the top half to be vibrant yellow/gold and the bottom half to be very dark gold */
+                linear-gradient(to bottom, #ffe875 0%, #fced4e 45%, #695105 55%, #382501 100%);
+                
+            background-blend-mode: overlay, normal, multiply, overlay, soft-light, normal, normal;
             background-size: 100% 100%;
             
-            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 74%, 50% 100%, 0% 74%);
+            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 88%, 50% 100%, 0% 88%);
             display: flex;
             flex-direction: column;
             padding: 24px 12px 15px 12px;
@@ -117,30 +118,29 @@
             z-index: 2;
         }
 
-        /* Moving Neon Wave & Breathing Pulse Animation Loops */
-        @keyframes neonPulse {
-            0% {
-                background-position: 0% 50%;
-                filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.5));
-            }
-            50% {
-                background-position: 100% 50%;
-                filter: drop-shadow(0 0 30px rgba(0, 102, 255, 0.8));
-            }
-            100% {
-                background-position: 0% 50%;
-                filter: drop-shadow(0 0 15px rgba(0, 229, 255, 0.5));
-            }
+        .card-inner::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.6) 42%, rgba(255, 248, 194, 0.7) 48%, transparent 56%);
+            background-size: 280% 280%;
+            background-position: 170% 170%;
+            mix-blend-mode: color-dodge;
+            z-index: 3; 
+            pointer-events: none;
+            transition: background-position 0.15s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* Top Module Layout Frame Container */
+        /* FIXED SPACE ENGINE: Tightened height to 135px to pull the upper modules up and clear room for blocks below */
         .card-top {
             display: flex;
-            height: 160px;
+            height: 135px;
             width: 100%;
             margin-top: 5px;
             position: relative;
+            z-index: 4; 
         }
+
         .badge-ovr {
             display: flex;
             flex-direction: column;
@@ -154,19 +154,15 @@
         }
 
         .ovr-txt {
-            font-size: 44px;
+            font-size: 46px;
             font-weight: 900;
             line-height: 38px;
             letter-spacing: -2px;
-            color: #000;
+            color: #050401;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.4);
         }
 
-        .pos-txt {
-            font-size: 13px;
-            font-weight: 900;
-            text-transform: uppercase;
-            color: #1a1303;
-        }
+        .pos-txt { font-size: 13px; font-weight: 900; text-transform: uppercase; color: #050401; }
 
         .flag-img {
             width: 24px;
@@ -177,12 +173,7 @@
             margin: 2px 0;
         }
 
-        .club-icon {
-            width: 20px;
-            height: 20px;
-            opacity: 0.85;
-            margin-top: 2px;
-        }
+        .club-icon { width: 20px; height: 20px; opacity: 0.85; margin-top: 2px; }
 
         .avatar-placeholder {
             width: 75%;
@@ -190,217 +181,173 @@
             justify-content: center;
             align-items: flex-end;
             overflow: hidden;
-            z-index: 3;
+            z-index: 4;
         }
 
         .avatar-placeholder svg, .avatar-placeholder img {
             width: 90%;
             height: auto;
-            max-height: 135px;
+            max-height: 115px;
             object-fit: contain;
             object-position: bottom center;
+        }
+        /* RESOLVED STACK: Encasing container utilizing zero negative overrides */
+        .name-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 92%;                       
+            margin: 0 auto;                  
+            padding: 4px 0;
+            z-index: 4;
+            
+            background-color: var(--stat-panel-bg); 
+            border: 2px solid var(--stat-box-border); 
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+            box-sizing: border-box;
         }
 
         .player-name {
             text-align: center;
-            font-size: 21px;
+            font-family: "Arial Black", -apple-system, sans-serif;
+            font-size: 20px;
             font-weight: 900;
             text-transform: uppercase;
-            padding: 2px 0;
-            margin: 14px 10px 15px 10px;
             letter-spacing: -0.5px;
-            color: #000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-            z-index: 4;
+            margin: 0;
+            padding: 3px 10px;
+            color: #ffd84a; 
+            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.8);
         }
 
-        /* FIXED STATS RIBBON BOX: Narrowed, lifted up, and completely theme-reactive */
+        /* RESOLVED ALIGNMENT: Widened box sits completely within bottom boundaries with zero squish risk */
         .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            padding: 6px 2px;
-            width: 92%;               /* Narrowed to clear sloping shield point */
-            margin: -10px auto 0 auto; /* Negative margin lifts it safely inside the card frame */
-            justify-content: center;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            z-index: 4;
-            
-            /* Theme-reactive dark ribbon panel overlay background */
-            background-color: var(--stat-dark-overlay);
-            border-radius: 6px;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s;
+            padding: 10px 16px;       
+            width: 92%;               
+            margin: 10px auto 0 auto; 
+            z-index: 4; 
+            background-color: var(--stat-panel-bg);
+            border-radius: 8px;
+            border: 2px solid var(--stat-box-border); 
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55);
+            box-sizing: border-box;
+        }
+
+        .stat-column {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;                 
+            flex: 1;
         }
 
         .stat-item {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            line-height: 1.2;
-            border-right: 1px solid rgba(255, 255, 255, 0.15);
+            justify-content: flex-start;
+            gap: 10px;                
+            line-height: 1.1;
+            width: 100%;
         }
 
-        .stat-item:last-child {
-            border-right: none;
+        .stat-val { 
+            font-size: 22px;          
+            font-weight: 900; 
+            color: #fff; 
+            width: 32px;
+            text-align: left;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
         .stat-label {
-            font-size: 11px;
+            font-size: 15px;          
             font-weight: 800;
-            color: #fff;
-            opacity: 0.9;
+            color: #ffd84a; 
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 2px;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.5);
         }
 
-        .stat-val {
-            font-size: 17px;
-            font-weight: 900;
-            color: #fff;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        .stats-vertical-divider {
+            width: 2px;
+            height: 68px;             
+            background-color: var(--stat-box-border);
+            opacity: 0.75;
+            margin: 0 8px;
+            border-radius: 1px;
         }
 
-        /* --- CONTROLS EDIT PANEL --- */
-        .controls-panel {
-            display: none;
-            flex-direction: column;
-            gap: 14px;
-            width: 320px;
-            border-left: 1px solid #374151;
-            padding-left: 30px;
-        }
-
-        h2 {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            margin-top: 0;
-            font-size: 24px;
-            border-bottom: 1px solid #475569;
-            padding-bottom: 8px;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        label {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            font-size: 13px;
-            font-weight: 600;
-            color: #94a3b8;
-        }
-
-        input[type="text"], select, textarea {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            background-color: #0f172a;
-            border: 1px solid #475569;
-            color: #fff;
-            padding: 8px 12px;
-            border-radius: 6px;
-            font-size: 15px;
-            outline: none;
-        }
-
-        .btn-upload {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            color: white;
-            border: none;
-            padding: 10px 14px;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .slider-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        input[type="range"] {
-            flex: 1;
-            accent-color: #dca021;
-            cursor: pointer;
-        }
-
-        .slider-val {
-            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-            width: 30px;
-            text-align: right;
-            font-weight: 700;
-            font-size: 15px;
-        }
+        /* --- CONTROL PANEL SIDEBAR --- */
+        .controls-panel { display: flex; flex-direction: column; gap: 14px; width: 320px; border-left: 1px solid #374151; padding-left: 30px; }
+        h2 { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin-top: 0; font-size: 24px; border-bottom: 1px solid #475569; padding-bottom: 8px; }
+        .input-group { display: flex; flex-direction: column; gap: 4px; }
+        label { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; font-weight: 600; color: #94a3b8; }
+        input[type="text"], select, textarea { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background-color: #0f172a; border: 1px solid #475569; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 15px; outline: none; }
+        .btn-upload { font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: white; border: none; padding: 10px 14px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; }
+        .slider-row { display: flex; align-items: center; gap: 12px; }
+        input[type="range"] { flex: 1; accent-color: #dca021; cursor: pointer; }
+        .slider-val { width: 30px; text-align: right; font-weight: 700; font-size: 15px; }
 
         @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-            .controls-panel {
-                width: 100%;
-                border-left: none;
-                border-top: 1px solid #374151;
-                padding-left: 0;
-                padding-top: 20px;
-            }
+            .container { flex-direction: column; align-items: center; }
+            .controls-panel { width: 100%; border-left: none; border-top: 1px solid #374151; padding-left: 0; padding-top: 20px; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <!-- Outer Animating Neon Frame Mesh Wrapper Layer -->
     <div class="card-container">
         <div class="neon-border-wrapper" id="glowWrapper">
             <div class="fut-card" id="cardElement">
-                <div class="card-inner">
-                    <!-- Top section containing the continuous wing texture and player silhouette -->
-                    <div class="card-top" id="cardTopElement">
-                        <!-- Left Vertical Deck Alignment Info Frame -->
+                <div class="card-inner" id="cardInnerLayer">
+                    <div class="card-top">
                         <div class="badge-ovr">
                             <span class="ovr-txt" id="cardOvr">85</span>
-                            <span class="pos-txt">CUE</span>
-                            <!-- Dynamic Flag Image Slot -->
-                            <img src="https://netlify.app" class="flag-img" id="cardFlag" alt="Country Flag">
-                            <!-- Custom Game Badge Emblem -->
+                            <span class="pos-txt" id="cardPos">CUE</span>
+                            <img src="https://wikimedia.org" class="flag-img" id="cardFlag" alt="Country Flag">
                             <svg class="club-icon" viewBox="0 0 100 100" xmlns="http://w3.org">
-                                <circle cx="50" cy="50" r="45" fill="#000"/>
-                                <circle cx="50" cy="50" r="20" fill="#fff"/>
+                                <circle cx="50" cy="50" r="45" fill="#000"/><circle cx="50" cy="50" r="20" fill="#fff"/>
                             </svg>
                         </div>
-                        <!-- Right Profile Silhouette Canvas Container -->
                         <div class="avatar-placeholder" id="avatarPlaceholder">
-                            <svg viewBox="0 0 100 100" xmlns="http://w3.org">
-                                <path d="M50,90 C30,90 20,75 20,60 C20,40 30,20 50,20 C70,20 80,40 80,60 C80,75 70,90 50,90 Z" fill="#111" opacity="0.85"/>
-                                <circle cx="50" cy="40" r="18" fill="#111" opacity="0.85"/>
+                            <svg id="defaultSilhouette" viewBox="0 0 100 100" xmlns="http://w3.org">
+                                <path d="M50,90 C30,90 20,75 20,60 C20,40 30,20 50,20 C70,20 80,40 80,60 C80,75 70,90 50,90 Z" fill="#000" opacity="0.25"/>
+                                <circle cx="50" cy="40" r="18" fill="#000" opacity="0.25"/>
                             </svg>
                         </div>
                     </div>
                     
-                    <!-- Player Name Center Row Header -->
-                    <div class="player-name" id="cardName">PLAYER NAME</div>
+                    <!-- ENCAPSULATED NAME BANNER LAYER -->
+                    <div class="name-box">
+                        <div class="player-name" id="cardName">PLAYER NAME</div>
+                    </div>
                     
-                    <!-- Lifted, Narrowed, Theme-Reactive Stats Ribbon Row -->
                     <div class="stats-grid" id="statsGridElement">
-                        <div class="stat-item"><span class="stat-label">AGG</span><span class="stat-val" id="cardAgg">85</span></div>
-                        <div class="stat-item"><span class="stat-label">CTR</span><span class="stat-val" id="cardCtr">85</span></div>
-                        <div class="stat-item"><span class="stat-label">SEL</span><span class="stat-val" id="cardSel">85</span></div>
-                        <div class="stat-item"><span class="stat-label">POT</span><span class="stat-val" id="cardPot">85</span></div>
-                        <div class="stat-item"><span class="stat-label">SAF</span><span class="stat-val" id="cardSaf">85</span></div>
-                        <div class="stat-item"><span class="stat-label">TEM</span><span class="stat-val" id="cardTem">85</span></div>
+                        <!-- Left Column (3 Stats) -->
+                        <div class="stat-column">
+                            <div class="stat-item"><span class="stat-val" id="cardAgg">85</span><span class="stat-label">AGG</span></div>
+                            <div class="stat-item"><span class="stat-val" id="cardCtr">85</span><span class="stat-label">CTR</span></div>
+                            <div class="stat-item"><span class="stat-val" id="cardSel">85</span><span class="stat-label">SEL</span></div>
+                        </div>
+                        
+                        <div class="stats-vertical-divider"></div>
+                        
+                        <!-- Right Column (3 Stats) -->
+                        <div class="stat-column">
+                            <div class="stat-item"><span class="stat-val" id="cardPot">85</span><span class="stat-label">POT</span></div>
+                            <div class="stat-item"><span class="stat-val" id="cardSaf">85</span><span class="stat-label">SAF</span></div>
+                            <div class="stat-item"><span class="stat-val" id="cardTem">85</span><span class="stat-label">TEM</span></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Generator Interface Panels (Secret Admin Section) -->
+
+    <!-- Configuration Settings Sidebar Form Workspace Panel Controls -->
     <div class="controls-panel" id="adminPanel">
         <h2>Cueverse Card Editor</h2>
         
@@ -418,29 +365,23 @@
         <div class="input-group">
             <label for="countryInput">Player Nationality</label>
             <select id="countryInput">
+                <option value="pt" selected>Portugal</option>
                 <option value="gb">United Kingdom</option>
                 <option value="us">United States</option>
                 <option value="br">Brazil</option>
                 <option value="de">Germany</option>
-                <option value="fr">France</option>
-                <option value="es">Spain</option>
-                <option value="cn">China</option>
-                <option value="jp">Japan</option>
-                <option value="ca">Canada</option>
-                <option value="au">Australia</option>
             </select>
         </div>
 
         <div class="input-group">
-            <label for="tierInput">Card Tier Theme</label>
+            <label for="tierInput">Card Tier Theme Color Preset</label>
             <select id="tierInput">
-                <option value="gold">Gold Premium</option>
-                <option value="silver">Silver Premium</option>
-                <option value="bronze">Bronze Premium</option>
+                <option value="gold" selected>Gold Crystal Chards</option>
+                <option value="silver">Silver Crystal Chards</option>
+                <option value="bronze">Bronze Crystal Chards</option>
             </select>
         </div>
 
-        <!-- Metric Range Sliders -->
         <div class="input-group">
             <label for="aggInput">Aggression (AGG)</label>
             <div class="slider-row">
@@ -448,105 +389,85 @@
                 <span class="slider-val" id="aggVal">85</span>
             </div>
         </div>
-
         <div class="input-group">
             <label for="ctrInput">Control (CTR)</label>
-            <div class="slider-row">
-                <input type="range" id="ctrInput" min="10" max="99" value="85">
-                <span class="slider-val" id="ctrVal">85</span>
-            </div>
+            <div class="slider-row"><input type="range" id="ctrInput" min="10" max="99" value="85"><span class="slider-val" id="ctrVal">85</span></div>
         </div>
-
         <div class="input-group">
             <label for="selInput">Shot Selection (SEL)</label>
-            <div class="slider-row">
-                <input type="range" id="selInput" min="10" max="99" value="85">
-                <span class="slider-val" id="selVal">85</span>
-            </div>
+            <div class="slider-row"><input type="range" id="selInput" min="10" max="99" value="85"><span class="slider-val" id="selVal">85</span></div>
         </div>
-
         <div class="input-group">
             <label for="potInput">Potting (POT)</label>
-            <div class="slider-row">
-                <input type="range" id="potInput" min="10" max="99" value="85">
-                <span class="slider-val" id="potVal">85</span>
-            </div>
+            <div class="slider-row"><input type="range" id="potInput" min="10" max="99" value="85"><span class="slider-val" id="potVal">85</span></div>
         </div>
-
         <div class="input-group">
             <label for="safInput">Safety (SAF)</label>
-            <div class="slider-row">
-                <input type="range" id="safInput" min="10" max="99" value="85">
-                <span class="slider-val" id="safVal">85</span>
-            </div>
+            <div class="slider-row"><input type="range" id="safInput" min="10" max="99" value="85"><span class="slider-val" id="safVal">85</span></div>
         </div>
-
         <div class="input-group">
             <label for="temInput">Temperament (TEM)</label>
-            <div class="slider-row">
-                <input type="range" id="temInput" min="10" max="99" value="85">
-                <span class="slider-val" id="temVal">85</span>
-            </div>
+            <div class="slider-row"><input type="range" id="temInput" min="10" max="99" value="85"><span class="slider-val" id="temVal">85</span></div>
         </div>
 
-        <!-- Export Deployment Block -->
         <div class="input-group" style="margin-top: 10px; border-top: 1px solid #374151; padding-top: 15px;">
-            <button class="btn-upload" style="background-color: #10b981;" onclick="generateBakedCode()">Get Deployment Code</button>
+            <button class="btn-upload" style="background-color: #10b981;" onclick="generateBakedCode()" id="actionBtn">Copy Card Code Bundle</button>
         </div>
         
-        <!-- Output Code Box Window Display -->
         <div class="input-group" id="outputArea" style="display: none; margin-top: 10px;">
-            <label>Copy this text and paste it to your index.html file:</label>
-            <textarea id="codeBox" rows="6" style="font-family: monospace; font-size: 11px;" readonly></textarea>
+            <textarea id="codeBox" rows="3" style="font-family: monospace; font-size: 11px;" readonly></textarea>
         </div>
     </div>
 </div>
 <script>
-    // Map input components
     const nameInput = document.getElementById('nameInput');
     const countryInput = document.getElementById('countryInput');
     const tierInput = document.getElementById('tierInput');
-    const aggInput = document.getElementById('aggInput');
-    const ctrInput = document.getElementById('ctrInput');
-    const selInput = document.getElementById('selInput');
-    const potInput = document.getElementById('potInput');
-    const safInput = document.getElementById('safInput');
-    const temInput = document.getElementById('temInput');
     const imageLoader = document.getElementById('imageLoader');
-    const adminPanel = document.getElementById('adminPanel');
 
-    // Map card display items
     const cardName = document.getElementById('cardName');
     const cardFlag = document.getElementById('cardFlag');
-    const cardElement = document.getElementById('cardElement');
+    const cardInnerLayer = document.getElementById('cardInnerLayer');
     const avatarContainer = document.getElementById('avatarPlaceholder');
-    
-    const cardOvr = document.getElementById('cardOvr');
-    const cardAgg = document.getElementById('cardAgg');
-    const cardCtr = document.getElementById('cardCtr');
-    const cardSel = document.getElementById('cardSel');
-    const cardPot = document.getElementById('cardPot');
-    const cardSaf = document.getElementById('cardSaf');
-    const cardTem = document.getElementById('cardTem');
+    const glowWrapper = document.getElementById('glowWrapper');
 
-    const aggVal = document.getElementById('aggVal');
-    const ctrVal = document.getElementById('ctrVal');
-    const selVal = document.getElementById('selVal');
-    const potVal = document.getElementById('potVal');
-    const safVal = document.getElementById('safVal');
-    const temVal = document.getElementById('temVal');
+    const metrics = ['agg', 'ctr', 'sel', 'pot', 'saf', 'tem'];
 
-    // --- SECRET URL VISIBILITY ENGINE ---
-    function checkUrlPermissions() {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('edit') === 'true') {
-            adminPanel.style.display = 'flex';
-        } else {
-            adminPanel.style.display = 'none';
+    const flags = {
+        gb: "https://wikimedia.org",
+        us: "https://wikimedia.org",
+        br: "https://wikimedia.org",
+        de: "https://wikimedia.org",
+        pt: "https://wikimedia.org"
+    };
+
+    glowWrapper.addEventListener('mousemove', (e) => {
+        const rect = glowWrapper.getBoundingClientRect();
+        const x = e.clientX - rect.left; 
+        const y = e.clientY - rect.top; 
+        
+        const rotateX = ((y / rect.height) - 0.5) * -28; 
+        const rotateY = ((x / rect.width) - 0.5) * 28;
+        
+        glowWrapper.style.transform = `scale(1.14) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        
+        const glossX = (x / rect.width) * 100;
+        const glossY = (y / rect.height) * 100;
+        
+        const targetInnerRule = Array.from(document.styleSheets.cssRules).find(r => r.selectorText === '.card-inner::after');
+        if(targetInnerRule) {
+            targetInnerRule.style.backgroundPosition = `${100 - glossX}% ${100 - glossY}%`;
         }
-    }
+    });
 
-    // Image Upload Engine Logic
+    glowWrapper.addEventListener('mouseleave', () => {
+        glowWrapper.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
+        const targetInnerRule = Array.from(document.styleSheets.cssRules).find(r => r.selectorText === '.card-inner::after');
+        if(targetInnerRule) {
+            targetInnerRule.style.backgroundPosition = '170% 170%';
+        }
+    });
+
     imageLoader.addEventListener('change', function(e) {
         const reader = new FileReader();
         reader.onload = function(event) {
@@ -555,138 +476,79 @@
             img.src = event.target.result;
             avatarContainer.appendChild(img);
         }
-        if(e.target.files && e.target.files[0]) {
-            reader.readAsDataURL(e.target.files[0]);
+        if(e.target.files && e.target.files) {
+            reader.readAsDataURL(e.target.files);
         }
     });
 
-    // Live mathematical calculation mapping
-    function updateOverall() {
-        const agg = parseInt(aggInput.value) || 0;
-        const ctr = parseInt(ctrInput.value) || 0;
-        const sel = parseInt(selInput.value) || 0;
-        const pot = parseInt(potInput.value) || 0;
-        const saf = parseInt(safInput.value) || 0;
-        const tem = parseInt(temInput.value) || 0;
-        
-        const average = Math.round((agg + ctr + sel + pot + saf + tem) / 6);
-        cardOvr.textContent = average;
-    }
-
-    // Main layout renderer pipeline with Full Card Theme Transformation Control
     function updateCard() {
         cardName.textContent = nameInput.value || "PLAYER NAME";
+        cardFlag.src = flags[countryInput.value];
         
-        // Forcing country code to lowercase so the flag API matches perfectly
-        const cleanCountryCode = String(countryInput.value).toLowerCase();
-        cardFlag.src = `https://netlify.app{cleanCountryCode}.png`;
-        
-        cardAgg.textContent = aggInput.value;
-        aggVal.textContent = aggInput.value;
-        
-        cardCtr.textContent = ctrInput.value;
-        ctrVal.textContent = ctrInput.value;
-        
-        cardSel.textContent = selInput.value;
-        selVal.textContent = selInput.value;
-        
-        cardPot.textContent = potInput.value;
-        potVal.textContent = potInput.value;
-        
-        cardSaf.textContent = safInput.value;
-        safVal.textContent = safInput.value;
-        
-        cardTem.textContent = temInput.value;
-        temVal.textContent = temInput.value;
+        let total = 0;
+        metrics.forEach(m => {
+            const val = parseInt(document.getElementById(`${m}Input`).value) || 0;
+            total += val;
+            document.getElementById(`${m}Val`).textContent = val;
+            document.getElementById(`card${m.charAt(0).toUpperCase() + m.slice(1)}`).textContent = val;
+        });
+        document.getElementById('cardOvr').textContent = Math.round(total / 6);
 
-        // Visual tier theme updates - transforms whole card root values
         if (tierInput.value === 'gold') {
-            document.documentElement.style.setProperty('--fc-card-base', 'linear-gradient(180deg, #ffd700 0%, #dca021 100%)');
-            document.documentElement.style.setProperty('--stat-dark-overlay', '#85610d'); 
-            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#dca021');
+            document.documentElement.style.setProperty('--stat-box-border', '#946f02'); 
+            document.documentElement.style.setProperty('--stat-panel-bg', 'rgba(30, 20, 1, 0.75)');
+            cardInnerLayer.style.backgroundImage = `
+                linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 45%),
+                linear-gradient(225deg, rgba(0,0,0,0.3) 0%, transparent 55%),
+                conic-gradient(from 145deg at 75% 25%, #cfa81f 0deg, #ffd952 50deg, #594202 120deg, transparent 190deg),
+                conic-gradient(from 215deg at 35% 65%, #b59210 0deg, #402e01 80deg, #ffeba3 140deg, transparent 220deg),
+                conic-gradient(from 55deg at 85% 50%, #9e7a0d 0deg, #fff085 60deg, #302200 140deg, transparent 200deg),
+                conic-gradient(from 290deg at 20% 30%, #302200 0deg, #ebd05b 70deg, #876707 150deg, transparent 230deg),
+                linear-gradient(to bottom, #ffe875 0%, #fced4e 45%, #695105 55%, #382501 100%)
+            `;
         } else if (tierInput.value === 'silver') {
-            document.documentElement.style.setProperty('--fc-card-base', 'linear-gradient(180deg, #ffffff 0%, #94a3b8 100%)');
-            document.documentElement.style.setProperty('--stat-dark-overlay', '#242e3d'); 
-            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#64748b');
+            document.documentElement.style.setProperty('--stat-box-border', '#475569'); 
+            document.documentElement.style.setProperty('--stat-panel-bg', 'rgba(15, 23, 42, 0.65)');
+            cardInnerLayer.style.backgroundImage = `
+                linear-gradient(135deg, rgba(255,255,255,0.8) 0%, transparent 45%),
+                linear-gradient(225deg, rgba(0,0,0,0.2) 0%, transparent 55%),
+                conic-gradient(from 145deg at 75% 25%, #94a3b8 0deg, #ffffff 50deg, #475569 120deg, transparent 190deg),
+                conic-gradient(from 215deg at 35% 65%, #cbd5e1 0deg, #1e293b 80deg, #f8fafc 140deg, transparent 220deg),
+                conic-gradient(from 55deg at 85% 50%, #64748b 0deg, #ffffff 60deg, #0f172a 140deg, transparent 200deg),
+                conic-gradient(from 290deg at 20% 30%, #1e293b 0deg, #ffffff 70deg, #94a3b8 150deg, transparent 230deg),
+                linear-gradient(to bottom, #f1f5f9 0%, #cbd5e1 45%, #334155 55%, #0f172a 100%)
+            `;
         } else if (tierInput.value === 'bronze') {
-            document.documentElement.style.setProperty('--fc-card-base', 'linear-gradient(180deg, #ffedd5 0%, #b45309 100%)');
-            document.documentElement.style.setProperty('--stat-dark-overlay', '#2c0d05'); 
-            document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#b45309');
+            document.documentElement.style.setProperty('--stat-box-border', '#451a03'); 
+            document.documentElement.style.setProperty('--stat-panel-bg', 'rgba(43, 17, 2, 0.7)');
+            cardInnerLayer.style.backgroundImage = `
+                linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 45%),
+                linear-gradient(225deg, rgba(0,0,0,0.4) 0%, transparent 55%),
+                conic-gradient(from 145deg at 75% 25%, #b45309 0deg, #ffedd5 50deg, #451a03 120deg, transparent 190deg),
+                conic-gradient(from 215deg at 35% 65%, #d97706 0deg, #2b1102 80deg, #fed7aa 140deg, transparent 220deg),
+                conic-gradient(from 55deg at 85% 50%, #431407 0deg, #fde68a 60deg, #0c0400 140deg, transparent 220deg),
+                conic-gradient(from 290deg at 20% 30%, #0c0400 0deg, #b45309 70deg, #451a03 150deg, transparent 230deg),
+                linear-gradient(to bottom, #ffedd5 0%, #fed7aa 45%, #451a03 55%, #1c0a00 100%)
+            `;
         }
-
-        updateOverall();
     }
 
-    // --- SNAPSHOT DEPLOYMENT EXPORTER ---
     function generateBakedCode() {
-        const stylesBlock = document.getElementsByTagName('style')[0].outerHTML;
-        const scriptsBlock = document.getElementsByTagName('script')[0].outerHTML;
-        const activeAvatarGraphic = avatarContainer.innerHTML.trim();
-        
-        const bakedHtmlPage = `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cueverse Player Card Showcase</title>
-    ${stylesBlock}
-</head>
-<body>
-<div class="container">
-    <div class="card-container">
-        <div class="neon-border-wrapper" id="glowWrapper">
-            <div class="fut-card" id="cardElement" style="background: ${getComputedStyle(cardElement).background};">
-                <div class="card-inner">
-                    <div class="card-top" id="cardTopElement">
-                        <div class="badge-ovr">
-                            <span class="ovr-txt">${cardOvr.textContent}</span>
-                            <span class="pos-txt">CUE</span>
-                            <img src="${cardFlag.src}" class="flag-img">
-                            <svg class="club-icon" viewBox="0 0 100 100" xmlns="http://w3.org"><circle cx="50" cy="50" r="45" fill="#000"/><circle cx="50" cy="50" r="20" fill="#fff"/></svg>
-                        </div>
-                        <div class="avatar-placeholder" id="avatarPlaceholder">${activeAvatarGraphic}</div>
-                    </div>
-                    <div class="player-name">${cardName.textContent}</div>
-                    <div class="stats-grid" id="statsGridElement" style="background-color: ${getComputedStyle(document.getElementById('statsGridElement')).backgroundColor};">
-                        <div class="stat-item"><span class="stat-label">AGG</span><span class="stat-val">${cardAgg.textContent}</span></div>
-                        <div class="stat-item"><span class="stat-label">CTR</span><span class="stat-val">${cardCtr.textContent}</span></div>
-                        <div class="stat-item"><span class="stat-label">SEL</span><span class="stat-val">${cardSel.textContent}</span></div>
-                        <div class="stat-item"><span class="stat-label">POT</span><span class="stat-val">${cardPot.textContent}</span></div>
-                        <div class="stat-item"><span class="stat-label">SAF</span><span class="stat-val">${cardSaf.textContent}</span></div>
-                        <div class="stat-item"><span class="stat-label">TEM</span><span class="stat-val">${cardTem.textContent}</span></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="controls-panel" id="adminPanel" style="display: none;">
-        ${adminPanel.innerHTML}
-    </div>
-</div>
-${scriptsBlock}
-</body>
-</html>`;
-
-        document.getElementById('codeBox').value = bakedHtmlPage;
-        document.getElementById('outputArea').style.display = 'block';
-        document.getElementById('codeBox').select();
+        const stylesBlock = document.getElementsByTagName('style').outerHTML;
+        const cardStructureHTML = document.querySelector('.card-container').innerHTML;
+        const bakedHtmlPage = `<!DOCTYPE html><html lang="en"><head>${stylesBlock}</head><body style="background:#02040a; display:flex; justify-content:center; align-items:center; min-height:100vh;">${cardStructureHTML}</body></html>`;
+        navigator.clipboard.writeText(bakedHtmlPage).then(() => {
+            const btn = document.getElementById('actionBtn');
+            btn.textContent = "COPIED TO CLIPBOARD! ✓";
+            btn.style.backgroundColor = "#059669";
+            setTimeout(() => { btn.textContent = "Copy Card Code Bundle"; btn.style.backgroundColor = "#10b981"; }, 2000);
+        });
     }
 
-    // Input monitoring tracking listeners
-    nameInput.addEventListener('input', updateCard);
-    countryInput.addEventListener('change', updateCard);
-    tierInput.addEventListener('change', updateCard);
-    aggInput.addEventListener('input', updateCard);
-    ctrInput.addEventListener('input', updateCard);
-    selInput.addEventListener('input', updateCard);
-    potInput.addEventListener('input', updateCard);
-    safInput.addEventListener('input', updateCard);
-    temInput.addEventListener('input', updateCard);
+    [nameInput, countryInput, tierInput].forEach(el => el.addEventListener('input', updateCard));
+    metrics.forEach(m => document.getElementById(`${m}Input`).addEventListener('input', updateCard));
 
-    // Initial page load triggers
-    checkUrlPermissions();
     updateCard();
 </script>
-
 </body>
 </html>
