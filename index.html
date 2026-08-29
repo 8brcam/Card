@@ -10,10 +10,15 @@
             --panel-bg: #0b0f19;
             --text-color: #f8fafc;
             
-            /* High-fidelity ultimate team style base gradients */
-            --fc-gold-base: linear-gradient(180deg, #ffd700 0%, #b8860b 60%, #4a3200 100%);
-            --fc-silver-base: linear-gradient(180deg, #ffffff 0%, #94a3b8 60%, #1e293b 100%);
-            --fc-bronze-base: linear-gradient(180deg, #ffedd5 0%, #b45309 60%, #431407 100%);
+            /* High-fidelity card theme base color systems */
+            --fc-gold-base: linear-gradient(180deg, #ffd700 0%, #dca021 100%);
+            --fc-silver-base: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+            --fc-bronze-base: linear-gradient(180deg, #ffedd5 0%, #b45309 100%);
+            
+            /* Dynamic isolated stats box dark yellow overlay palette variables */
+            --stat-dark-gold: #85610d;
+            --stat-dark-silver: #242e3d;
+            --stat-dark-bronze: #2c0d05;
             
             /* Hyper-Vibrant Moving Blue Neon Border Palette */
             --neon-blue-glow: 0 0 25px rgba(0, 229, 255, 0.6), 0 0 10px rgba(0, 102, 255, 0.4);
@@ -46,7 +51,7 @@
             transition: all 0.3s ease;
         }
 
-        /* --- THE PREMIUM SHIELD ARCHITECTURE --- */
+        /* --- THE EVEN SHIELD ARCHITECTURE --- */
         .card-container {
             flex: 1;
             display: flex;
@@ -54,7 +59,7 @@
             align-items: center;
         }
 
-        /* Background Wrapper Mask dedicated entirely to holding the Moving Neon aura */
+        /* Perfectly Symmetrical and Even Shield Frame Wrapper holding the Moving Neon border aura */
         .neon-border-wrapper {
             position: relative;
             width: 278px;
@@ -68,20 +73,20 @@
             animation: neonPulse 4s linear infinite;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             
-            /* Sharp authentic shield cutout layout */
-            clip-path: polygon(0% 10%, 50% 0%, 100% 10%, 100% 75%, 50% 100%, 0% 75%);
+            /* Enhanced, perfectly balanced symmetrical cutout geometry */
+            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 74%, 50% 100%, 0% 74%);
         }
 
         .neon-border-wrapper:hover {
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 0 40px rgba(0, 229, 255, 0.8), 0 0 20px rgba(0, 102, 255, 0.6);
         }
-        /* Main card body nested perfectly within the pulsing frame wrapper */
+        /* Perfectly balanced symmetrical card container nested inside the frame wrapper */
         .fut-card {
             position: relative;
-            width: 272px; /* 3px thin inset to allow blue line transparency */
+            width: 272px; /* 3px thin inset to allow the neon line to show evenly */
             height: 392px;
-            background: var(--fc-gold-base);
+            background: #fff3a1; /* Lighter gold accent border foundation */
             color: #080602;
             display: flex;
             flex-direction: column;
@@ -90,18 +95,29 @@
             transition: background 0.3s;
             z-index: 2;
             
-            clip-path: polygon(0% 10%, 50% 0%, 100% 10%, 100% 75%, 50% 100%, 0% 75%);
+            /* Enhanced symmetrical cutout geometry to match outer wrapper */
+            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 74%, 50% 100%, 0% 74%);
         }
 
         .card-inner {
             position: relative;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.04);
-            clip-path: polygon(0% 10%, 50% 0%, 100% 10%, 100% 75%, 50% 100%, 0% 75%);
+            background: var(--fc-gold-base);
+            
+            /* CONTINUOUS MATRIX: Wing lines flow seamlessly all the way up and down the main card container */
+            background: radial-gradient(ellipse 140% 100% at 50% 105%, transparent 35%, rgba(0,0,0,0.18) 37%, rgba(255,255,255,0.08) 38%, transparent 40%),
+                        radial-gradient(ellipse 170% 120% at 50% 110%, transparent 42%, rgba(0,0,0,0.15) 44%, rgba(255,255,255,0.06) 45%, transparent 47%),
+                        radial-gradient(ellipse 200% 140% at 50% 115%, transparent 49%, rgba(0,0,0,0.12) 51%, rgba(255,255,255,0.05) 52%, transparent 54%),
+                        radial-gradient(ellipse 230% 160% at 50% 120%, transparent 56%, rgba(0,0,0,0.09) 58%, rgba(255,255,255,0.04) 59%, transparent 61%),
+                        radial-gradient(ellipse 260% 180% at 50% 125%, transparent 63%, rgba(0,0,0,0.06) 65%, rgba(255,255,255,0.03) 66%, transparent 68%),
+                        radial-gradient(circle at 50% 100%, rgba(255,255,255,0.15) 0%, transparent 90%);
+            background-size: 100% 100%;
+            
+            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 74%, 50% 100%, 0% 74%);
             display: flex;
             flex-direction: column;
-            padding: 25px 8px 15px 8px;
+            padding: 24px 12px 25px 12px; /* Increased bottom padding to lift content up */
             box-sizing: border-box;
             z-index: 2;
         }
@@ -125,11 +141,11 @@
         /* Top Module: Vertical Left Control Deck & Player Silhouette Portrait */
         .card-top {
             display: flex;
-            height: 155px;
+            height: 160px;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 5px;
+            position: relative;
         }
-
         .badge-ovr {
             display: flex;
             flex-direction: column;
@@ -138,7 +154,8 @@
             width: 25%;
             gap: 2px;
             padding-top: 5px;
-            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            border-right: 1px solid rgba(0, 0, 0, 0.08);
+            z-index: 4;
         }
 
         .ovr-txt {
@@ -178,6 +195,7 @@
             justify-content: center;
             align-items: flex-end;
             overflow: hidden;
+            z-index: 3;
         }
 
         .avatar-placeholder svg, .avatar-placeholder img {
@@ -194,20 +212,30 @@
             font-weight: 900;
             text-transform: uppercase;
             padding: 2px 0;
-            margin: 8px 10px 15px 10px;
+            margin: 14px 10px 15px 10px;
             letter-spacing: -0.5px;
             color: #000;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            z-index: 4;
         }
 
-        /* Single Straight Horizontal Row Stat Grid */
+        /* FIXED STATS RIBBON BOX: Narrowed and lifted to stay perfectly inside the shield edges */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
-            padding: 0 2px;
-            margin-top: 4px;
+            padding: 6px 2px;
+            width: 90%;            /* Narrowed from 100% to fit sloping point */
+            margin: 4px auto 0 auto; /* Centered automatically inside the frame */
             justify-content: center;
             align-items: center;
+            z-index: 4;
+            
+            /* Premium dark gold yellow stat background ribbon overlay panel */
+            background-color: var(--stat-dark-gold);
+            border-radius: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
         }
 
         .stat-item {
@@ -216,7 +244,7 @@
             align-items: center;
             justify-content: center;
             line-height: 1.2;
-            border-right: 1px solid rgba(0, 0, 0, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
         }
 
         .stat-item:last-child {
@@ -226,17 +254,19 @@
         .stat-label {
             font-size: 11px;
             font-weight: 800;
-            color: #241a05;
-            opacity: 0.75;
+            color: #fff;
+            opacity: 0.9;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 2px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         .stat-val {
             font-size: 17px;
             font-weight: 900;
-            color: #000;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
         }
 
         /* --- CONTROLS EDIT PANEL --- */
@@ -336,7 +366,8 @@
         <div class="neon-border-wrapper" id="glowWrapper">
             <div class="fut-card" id="cardElement">
                 <div class="card-inner">
-                    <div class="card-top">
+                    <!-- Top section containing the continuous wing texture and player silhouette -->
+                    <div class="card-top" id="cardTopElement">
                         <!-- Left Vertical Deck Alignment Info Frame -->
                         <div class="badge-ovr">
                             <span class="ovr-txt" id="cardOvr">85</span>
@@ -361,8 +392,8 @@
                     <!-- Player Name Center Row Header -->
                     <div class="player-name" id="cardName">PLAYER NAME</div>
                     
-                    <!-- Unified Straight Horizontal Row Grid System (No Vertical Overlaps) -->
-                    <div class="stats-grid">
+                    <!-- Centered and Protected Darker Stats Ribbon Box -->
+                    <div class="stats-grid" id="statsGridElement">
                         <div class="stat-item"><span class="stat-label">AGG</span><span class="stat-val" id="cardAgg">85</span></div>
                         <div class="stat-item"><span class="stat-label">CTR</span><span class="stat-val" id="cardCtr">85</span></div>
                         <div class="stat-item"><span class="stat-label">SEL</span><span class="stat-val" id="cardSel">85</span></div>
@@ -493,6 +524,7 @@
     const cardName = document.getElementById('cardName');
     const cardFlag = document.getElementById('cardFlag');
     const cardElement = document.getElementById('cardElement');
+    const statsGridElement = document.getElementById('statsGridElement');
     const avatarContainer = document.getElementById('avatarPlaceholder');
     
     const cardOvr = document.getElementById('cardOvr');
@@ -551,7 +583,7 @@
     function updateCard() {
         cardName.textContent = nameInput.value || "PLAYER NAME";
         
-        // CRITICAL FIX: Forcing country code to lowercase so the flag API matches perfectly
+        // Forcing country code to lowercase so the flag API matches perfectly
         const cleanCountryCode = String(countryInput.value).toLowerCase();
         cardFlag.src = `https://netlify.app{cleanCountryCode}.png`;
         
@@ -573,15 +605,18 @@
         cardTem.textContent = temInput.value;
         temVal.textContent = temInput.value;
 
-        // Visual tier theme and dynamic shadow glow adjustment
+        // Visual tier theme adjustments
         if (tierInput.value === 'gold') {
-            cardElement.style.background = 'var(--fc-gold-base)';
+            document.documentElement.style.setProperty('--fc-gold-base', 'linear-gradient(180deg, #ffd700 0%, #dca021 100%)');
+            document.documentElement.style.setProperty('--stat-dark-gold', '#85610d'); // Reset to isolated dark gold box
             document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#dca021');
         } else if (tierInput.value === 'silver') {
-            cardElement.style.background = 'var(--fc-silver-base)';
+            document.documentElement.style.setProperty('--fc-gold-base', 'linear-gradient(180deg, #ffffff 0%, #94a3b8 100%)');
+            document.documentElement.style.setProperty('--stat-dark-gold', '#242e3d'); // Isolated dark slate silver box
             document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#64748b');
         } else if (tierInput.value === 'bronze') {
-            cardElement.style.background = 'var(--fc-bronze-base)';
+            document.documentElement.style.setProperty('--fc-gold-base', 'linear-gradient(180deg, #ffedd5 0%, #b45309 100%)');
+            document.documentElement.style.setProperty('--stat-dark-gold', '#2c0d05'); // Isolated dark charcoal bronze box
             document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#b45309');
         }
 
@@ -606,9 +641,9 @@
 <div class="container">
     <div class="card-container">
         <div class="neon-border-wrapper" id="glowWrapper">
-            <div class="fut-card" id="cardElement" style="background: ${cardElement.style.background};">
+            <div class="fut-card" id="cardElement">
                 <div class="card-inner">
-                    <div class="card-top">
+                    <div class="card-top" id="cardTopElement">
                         <div class="badge-ovr">
                             <span class="ovr-txt">${cardOvr.textContent}</span>
                             <span class="pos-txt">CUE</span>
@@ -618,7 +653,7 @@
                         <div class="avatar-placeholder" id="avatarPlaceholder">${activeAvatarGraphic}</div>
                     </div>
                     <div class="player-name">${cardName.textContent}</div>
-                    <div class="stats-grid">
+                    <div class="stats-grid" id="statsGridElement">
                         <div class="stat-item"><span class="stat-label">AGG</span><span class="stat-val">${cardAgg.textContent}</span></div>
                         <div class="stat-item"><span class="stat-label">CTR</span><span class="stat-val">${cardCtr.textContent}</span></div>
                         <div class="stat-item"><span class="stat-label">SEL</span><span class="stat-val">${cardSel.textContent}</span></div>
