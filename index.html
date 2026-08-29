@@ -10,17 +10,12 @@
             --panel-bg: #0b0f19;
             --text-color: #f8fafc;
             
-            /* High-fidelity official metallic color spectrum gradients */
+            /* High-fidelity ultimate team style base gradients */
             --fc-gold-base: linear-gradient(180deg, #ffd700 0%, #b8860b 60%, #4a3200 100%);
             --fc-silver-base: linear-gradient(180deg, #ffffff 0%, #94a3b8 60%, #1e293b 100%);
             --fc-bronze-base: linear-gradient(180deg, #ffedd5 0%, #b45309 60%, #431407 100%);
             
-            /* Dynamic Theme Back-Glow Shadows */
-            --gold-glow: 0 0 30px rgba(220, 160, 33, 0.3);
-            --silver-glow: 0 0 30px rgba(148, 163, 184, 0.25);
-            --bronze-glow: 0 0 30px rgba(180, 83, 9, 0.3);
-            
-            /* Hyper-Vibrant Blue Neon Border Palette */
+            /* Hyper-Vibrant Moving Blue Neon Border Palette */
             --neon-blue-glow: 0 0 25px rgba(0, 229, 255, 0.6), 0 0 10px rgba(0, 102, 255, 0.4);
             --neon-blue-gradient: linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #00f0ff 100%);
         }
@@ -347,7 +342,7 @@
                             <span class="ovr-txt" id="cardOvr">85</span>
                             <span class="pos-txt">CUE</span>
                             <!-- Dynamic Flag Image Slot -->
-                            <img src="https://flagcdn.com" class="flag-img" id="cardFlag" alt="Country Flag">
+                            <img src="https://netlify.app" class="flag-img" id="cardFlag" alt="Country Flag">
                             <!-- Custom Game Badge Emblem -->
                             <svg class="club-icon" viewBox="0 0 100 100" xmlns="http://w3.org">
                                 <circle cx="50" cy="50" r="45" fill="#000"/>
@@ -555,7 +550,10 @@
     // Main layout renderer pipeline with Theme Control
     function updateCard() {
         cardName.textContent = nameInput.value || "PLAYER NAME";
-        cardFlag.src = `https://flagcdn.com{countryInput.value}.png`;
+        
+        // CRITICAL FIX: Forcing country code to lowercase so the flag API matches perfectly
+        const cleanCountryCode = String(countryInput.value).toLowerCase();
+        cardFlag.src = `https://netlify.app{cleanCountryCode}.png`;
         
         cardAgg.textContent = aggInput.value;
         aggVal.textContent = aggInput.value;
