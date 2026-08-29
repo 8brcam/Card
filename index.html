@@ -10,15 +10,11 @@
             --panel-bg: #0b0f19;
             --text-color: #f8fafc;
             
-            /* High-fidelity card theme base color systems */
-            --fc-gold-base: linear-gradient(180deg, #ffd700 0%, #dca021 100%);
-            --fc-silver-base: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
-            --fc-bronze-base: linear-gradient(180deg, #ffedd5 0%, #b45309 100%);
+            /* High-fidelity ultimate team style base gradients */
+            --fc-card-base: linear-gradient(180deg, #ffd700 0%, #dca021 100%);
             
-            /* Dynamic isolated stats box dark yellow overlay palette variables */
-            --stat-dark-gold: #85610d;
-            --stat-dark-silver: #242e3d;
-            --stat-dark-bronze: #2c0d05;
+            /* Dynamic isolated stats box dark overlay palette variables */
+            --stat-dark-overlay: #85610d;
             
             /* Hyper-Vibrant Moving Blue Neon Border Palette */
             --neon-blue-glow: 0 0 25px rgba(0, 229, 255, 0.6), 0 0 10px rgba(0, 102, 255, 0.4);
@@ -81,12 +77,12 @@
             transform: translateY(-8px) scale(1.02);
             box-shadow: 0 0 40px rgba(0, 229, 255, 0.8), 0 0 20px rgba(0, 102, 255, 0.6);
         }
-        /* Perfectly balanced symmetrical card container nested inside the frame wrapper */
+        /* Symmetrical card body container styled cleanly inside the border wrapper */
         .fut-card {
             position: relative;
             width: 272px; /* 3px thin inset to allow the neon line to show evenly */
             height: 392px;
-            background: #fff3a1; /* Lighter gold accent border foundation */
+            background: var(--fc-card-base); /* Dynamic: Changes colors for Gold, Silver, Bronze */
             color: #080602;
             display: flex;
             flex-direction: column;
@@ -95,7 +91,7 @@
             transition: background 0.3s;
             z-index: 2;
             
-            /* Enhanced symmetrical cutout geometry to match outer wrapper */
+            /* Symmetrical cutout geometry matching the outer wrapper */
             clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 74%, 50% 100%, 0% 74%);
         }
 
@@ -103,9 +99,8 @@
             position: relative;
             width: 100%;
             height: 100%;
-            background: var(--fc-gold-base);
             
-            /* CONTINUOUS MATRIX: Wing lines flow seamlessly all the way up and down the main card container */
+            /* CONTINUOUS MATRIX: Wing lines flow seamlessly up and down the card background */
             background: radial-gradient(ellipse 140% 100% at 50% 105%, transparent 35%, rgba(0,0,0,0.18) 37%, rgba(255,255,255,0.08) 38%, transparent 40%),
                         radial-gradient(ellipse 170% 120% at 50% 110%, transparent 42%, rgba(0,0,0,0.15) 44%, rgba(255,255,255,0.06) 45%, transparent 47%),
                         radial-gradient(ellipse 200% 140% at 50% 115%, transparent 49%, rgba(0,0,0,0.12) 51%, rgba(255,255,255,0.05) 52%, transparent 54%),
@@ -117,7 +112,7 @@
             clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 74%, 50% 100%, 0% 74%);
             display: flex;
             flex-direction: column;
-            padding: 24px 12px 25px 12px; /* Increased bottom padding to lift content up */
+            padding: 24px 12px 15px 12px;
             box-sizing: border-box;
             z-index: 2;
         }
@@ -138,7 +133,7 @@
             }
         }
 
-        /* Top Module: Vertical Left Control Deck & Player Silhouette Portrait */
+        /* Top Module Layout Frame Container */
         .card-top {
             display: flex;
             height: 160px;
@@ -219,19 +214,19 @@
             z-index: 4;
         }
 
-        /* FIXED STATS RIBBON BOX: Narrowed and lifted to stay perfectly inside the shield edges */
+        /* FIXED STATS RIBBON BOX: Narrowed, lifted up, and completely theme-reactive */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             padding: 6px 2px;
-            width: 90%;            /* Narrowed from 100% to fit sloping point */
-            margin: 4px auto 0 auto; /* Centered automatically inside the frame */
+            width: 92%;               /* Narrowed to clear sloping shield point */
+            margin: -10px auto 0 auto; /* Negative margin lifts it safely inside the card frame */
             justify-content: center;
             align-items: center;
             z-index: 4;
             
-            /* Premium dark gold yellow stat background ribbon overlay panel */
-            background-color: var(--stat-dark-gold);
+            /* Theme-reactive dark ribbon panel overlay background */
+            background-color: var(--stat-dark-overlay);
             border-radius: 6px;
             border: 1px solid rgba(0, 0, 0, 0.08);
             box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
@@ -392,7 +387,7 @@
                     <!-- Player Name Center Row Header -->
                     <div class="player-name" id="cardName">PLAYER NAME</div>
                     
-                    <!-- Centered and Protected Darker Stats Ribbon Box -->
+                    <!-- Lifted, Narrowed, Theme-Reactive Stats Ribbon Row -->
                     <div class="stats-grid" id="statsGridElement">
                         <div class="stat-item"><span class="stat-label">AGG</span><span class="stat-val" id="cardAgg">85</span></div>
                         <div class="stat-item"><span class="stat-label">CTR</span><span class="stat-val" id="cardCtr">85</span></div>
@@ -524,7 +519,6 @@
     const cardName = document.getElementById('cardName');
     const cardFlag = document.getElementById('cardFlag');
     const cardElement = document.getElementById('cardElement');
-    const statsGridElement = document.getElementById('statsGridElement');
     const avatarContainer = document.getElementById('avatarPlaceholder');
     
     const cardOvr = document.getElementById('cardOvr');
@@ -579,7 +573,7 @@
         cardOvr.textContent = average;
     }
 
-    // Main layout renderer pipeline with Theme Control
+    // Main layout renderer pipeline with Full Card Theme Transformation Control
     function updateCard() {
         cardName.textContent = nameInput.value || "PLAYER NAME";
         
@@ -605,18 +599,18 @@
         cardTem.textContent = temInput.value;
         temVal.textContent = temInput.value;
 
-        // Visual tier theme adjustments
+        // Visual tier theme updates - transforms whole card root values
         if (tierInput.value === 'gold') {
-            document.documentElement.style.setProperty('--fc-gold-base', 'linear-gradient(180deg, #ffd700 0%, #dca021 100%)');
-            document.documentElement.style.setProperty('--stat-dark-gold', '#85610d'); // Reset to isolated dark gold box
+            document.documentElement.style.setProperty('--fc-card-base', 'linear-gradient(180deg, #ffd700 0%, #dca021 100%)');
+            document.documentElement.style.setProperty('--stat-dark-overlay', '#85610d'); 
             document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#dca021');
         } else if (tierInput.value === 'silver') {
-            document.documentElement.style.setProperty('--fc-gold-base', 'linear-gradient(180deg, #ffffff 0%, #94a3b8 100%)');
-            document.documentElement.style.setProperty('--stat-dark-gold', '#242e3d'); // Isolated dark slate silver box
+            document.documentElement.style.setProperty('--fc-card-base', 'linear-gradient(180deg, #ffffff 0%, #94a3b8 100%)');
+            document.documentElement.style.setProperty('--stat-dark-overlay', '#242e3d'); 
             document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#64748b');
         } else if (tierInput.value === 'bronze') {
-            document.documentElement.style.setProperty('--fc-gold-base', 'linear-gradient(180deg, #ffedd5 0%, #b45309 100%)');
-            document.documentElement.style.setProperty('--stat-dark-gold', '#2c0d05'); // Isolated dark charcoal bronze box
+            document.documentElement.style.setProperty('--fc-card-base', 'linear-gradient(180deg, #ffedd5 0%, #b45309 100%)');
+            document.documentElement.style.setProperty('--stat-dark-overlay', '#2c0d05'); 
             document.querySelectorAll('input[type="range"]').forEach(el => el.style.accentColor = '#b45309');
         }
 
@@ -641,7 +635,7 @@
 <div class="container">
     <div class="card-container">
         <div class="neon-border-wrapper" id="glowWrapper">
-            <div class="fut-card" id="cardElement">
+            <div class="fut-card" id="cardElement" style="background: ${getComputedStyle(cardElement).background};">
                 <div class="card-inner">
                     <div class="card-top" id="cardTopElement">
                         <div class="badge-ovr">
@@ -653,7 +647,7 @@
                         <div class="avatar-placeholder" id="avatarPlaceholder">${activeAvatarGraphic}</div>
                     </div>
                     <div class="player-name">${cardName.textContent}</div>
-                    <div class="stats-grid" id="statsGridElement">
+                    <div class="stats-grid" id="statsGridElement" style="background-color: ${getComputedStyle(document.getElementById('statsGridElement')).backgroundColor};">
                         <div class="stat-item"><span class="stat-label">AGG</span><span class="stat-val">${cardAgg.textContent}</span></div>
                         <div class="stat-item"><span class="stat-label">CTR</span><span class="stat-val">${cardCtr.textContent}</span></div>
                         <div class="stat-item"><span class="stat-label">SEL</span><span class="stat-val">${cardSel.textContent}</span></div>
