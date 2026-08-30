@@ -211,7 +211,7 @@
 
         /* --- CONTROL PANEL SIDEBAR --- */
         .controls-panel { 
-            display: none; /* Hide the dashboard configuration tools by default */
+            display: none; /* Hidden by default. Requires /?edit=true parameter string to pop open */
             flex-direction: column; 
             gap: 14px; 
             width: 320px; 
@@ -284,7 +284,7 @@
         </div>
     </div>
 
-    <!-- Hidden Config Sidebar Panel Layout -->
+    <!-- Administrative Configuration Controls Panel -->
     <div class="controls-panel" id="adminPanel">
         <h2>Cueverse Card Editor</h2>
         
@@ -454,7 +454,7 @@
         });
     }
 
-    // 7. Interactive Bundle Compiler
+    // 7. Interactive Bundle Compiler with Built-in 3D Perspective Container Patch
     function generateBakedCode() {
         const primaryStyles = document.getElementById('themeStylesheet')?.outerHTML || '';
         const coreCardStructure = document.querySelector('.card-container')?.innerHTML || '';
@@ -482,7 +482,10 @@
             }
         <\/script>`;
 
-        const finalCompiledPayload = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">${primaryStyles}</head><body style="background:#02040a; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0;">${coreCardStructure}${automationScript}</body></html>`;
+        // CRITICAL PERSPECTIVE CONTAINER FIX: Ensures 3D depth animations maintain high quality inside GitHub Pages or standalone portals
+        const fixedCardStructure = `<div class="card-container" style="perspective: 1500px; display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh;">${coreCardStructure}</div>`;
+
+        const finalCompiledPayload = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">${primaryStyles}</head><body style="background:#02040a; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; overflow:hidden;">${fixedCardStructure}${automationScript}</body></html>`;
         const codeBox = document.getElementById('codeBox');
         const outputArea = document.getElementById('outputArea');
         if (codeBox) codeBox.value = finalCompiledPayload;
@@ -498,7 +501,7 @@
         });
     }
 
-    // --- 8. Secret Link Parameters Verification Check ---
+    // 8. Secret URL Search String Parameter Guard Verification
     const urlParameters = new URLSearchParams(window.location.search);
     if (urlParameters.get('edit') === 'true') {
         const adminPanel = document.getElementById('adminPanel');
