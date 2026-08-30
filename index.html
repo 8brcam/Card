@@ -195,8 +195,8 @@
             letter-spacing: -0.2px;
             margin: 0;
             padding: 3px 10px;
-            color: #ffffff; /* Crisp white font */
-            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95); /* Deep shadow definition */
+            color: #ffffff; /* Symmetrical crisp white font selection */
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95); /* Deep high-definition background drop shadow */
         }
 
         .stats-grid {
@@ -283,7 +283,7 @@
                         <div class="badge-ovr">
                             <span class="ovr-txt" id="cardOvr">85</span>
                             <span class="pos-txt" id="cardPos">CUE</span>
-                            <!-- Clean text layout block renders flag emojis completely independent of external media hosting vectors -->
+                            <!-- Clean native unicode vector flag container independent of cross-origin network hosts -->
                             <span id="cardFlag" style="font-size: 22px; line-height: 1; margin: 4px 0; display: inline-block; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));">🇵🇹</span>
                             <svg class="club-icon" viewBox="0 0 100 100" xmlns="http://w3.org">
                                 <circle cx="50" cy="50" r="45" fill="#000"/><circle cx="50" cy="50" r="20" fill="#fff"/>
@@ -329,7 +329,7 @@
 
         <div class="input-group">
             <label>Player Portrait Picture</label>
-            <!-- Repaired button listener lifecycle invocation triggers uploader securely -->
+            <!-- Fixed event lifecycle handler invocation maps perfectly to image selectors -->
             <button type="button" class="btn-upload" style="background-color: #2563eb;" onclick="document.getElementById('imageLoader').click();">Choose Image File</button>
             <input type="file" id="imageLoader" accept="image/*" style="display: none !important;">
         </div>
@@ -393,7 +393,7 @@
     </div>
 </div>
 <script>
-    // 1. DOM Nodes Target Mapping Engine
+    // 1. DOM Configurations Reference Cache
     const cardName = document.getElementById('cardName');
     const cardFlag = document.getElementById('cardFlag');
     const cardInnerLayer = document.getElementById('cardInnerLayer');
@@ -435,19 +435,19 @@
         });
     }
 
-    // 3. Picture Pipeline Loader
+    // 3. Picture Pipeline Loader (COMPLETELY STABLE SPECIFICATION)
     if (imageLoader) {
         imageLoader.addEventListener('change', function(e) {
-            if (e.target.files && e.target.files[0]) {
+            if (e.target.files && e.target.files[0]) { 
                 const reader = new FileReader();
                 reader.onload = function(event) {
                     avatarContainer.innerHTML = '';
                     const img = document.createElement('img');
                     img.src = event.target.result;
-                    img.style.cssText = "width: 90%; height: auto; max-height: 115px; object-fit: contain; object-position: bottom center;";
+                    img.style.cssText = "width: 90%; height: auto; max-height: 115px; object-fit: contain; object-position: bottom center; z-index: 4; position: relative;";
                     avatarContainer.appendChild(img);
                 };
-                reader.readAsDataURL(e.target.files[0]);
+                reader.readAsDataURL(e.target.files[0]); // Targets explicit binary blob entry location index 0
             }
         });
     }
@@ -481,8 +481,8 @@
 
     // 5. Dynamic Sync Form Values & Compute Rounded Card OVR
     function updateCard() {
-        if (cardName && nameInput) cardName.textContent = nameInput.value || "Player Name";
-        if (cardFlag && countryInput) cardFlag.textContent = flags[countryInput.value];
+        cardName.textContent = nameInput.value || "Player Name";
+        cardFlag.textContent = flags[countryInput.value];
         let totalStatsValue = 0;
         metrics.forEach(m => {
             const inputEl = document.getElementById(`${m}Input`);
