@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cueverse Premium Player Card Showcase</title>
-    <style>
+    <!-- Stable high-fidelity canvas capture engine library -->
+    <script src="https://cloudflare.com"></script>
+    <style id="themeStylesheet">
         :root {
             --bg-color: #02040a;
             --panel-bg: #0b0f19;
             --text-color: #f8fafc;
             --card-text: #050401;
-            
-            /* Symmetrical dark gold panel interior with crisp borders */
             --stat-box-border: #946f02;
-            --stat-panel-bg: rgba(30, 20, 1, 0.75); 
+            --stat-panel-bg: rgba(30, 20, 1, 0.75);
+            /* Initial neon pulse color variables */
+            --neon-start: #00f0ff;
+            --neon-mid: #0066ff;
+            --neon-end: #00f0ff;
         }
 
         body {
@@ -47,21 +51,20 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            perspective: 1500px; 
+            perspective: 1500px;
         }
 
         .neon-border-wrapper {
             position: relative;
             width: 278px;
             height: 398px;
-            background: linear-gradient(135deg, #00f0ff 0%, #0066ff 50%, #00f0ff 100%);
+            background: linear-gradient(135deg, var(--neon-start) 0%, var(--neon-mid) 50%, var(--neon-end) 100%);
             background-size: 200% 200%;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: center;
             align-items: center;
             animation: neonPulse 4s linear infinite;
-            
             transform-style: preserve-3d;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
             clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 88%, 50% 100%, 0% 88%);
@@ -69,19 +72,19 @@
 
         .neon-border-wrapper:hover {
             transform: scale(1.14) rotateX(10deg) rotateY(-5deg);
-            box-shadow: 0 30px 70px rgba(0, 229, 255, 0.5), 0 15px 30px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 30px 70px rgba(0, 229, 255, 0.35), 0 15px 30px rgba(0, 102, 255, 0.25);
         }
 
         .fut-card {
             position: relative;
-            width: 272px; 
+            width: 272px;
             height: 392px;
             display: flex;
             flex-direction: column;
             padding: 3px;
             box-sizing: border-box;
             z-index: 2;
-            transform: translateZ(35px); 
+            transform: translateZ(35px);
             clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 88%, 50% 100%, 0% 88%);
         }
 
@@ -90,26 +93,14 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+
         .card-inner {
             position: relative;
             width: 100%;
             height: 100%;
-            
-            /* RE-BLENDED BACKDROP: Shifting from intense bright gold down to deep dark gold at the bottom */
-            background-image: 
-                linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 45%),
-                linear-gradient(225deg, rgba(0,0,0,0.35) 0%, transparent 55%),
-                conic-gradient(from 145deg at 75% 25%, #cfa81f 0deg, #ffd952 50deg, #594202 120deg, transparent 190deg),
-                conic-gradient(from 215deg at 35% 65%, #b59210 0deg, #402e01 80deg, #ffeba3 140deg, transparent 220deg),
-                conic-gradient(from 55deg at 85% 50%, #9e7a0d 0deg, #fff085 60deg, #302200 140deg, transparent 200deg),
-                conic-gradient(from 290deg at 20% 30%, #302200 0deg, #ebd05b 70deg, #876707 150deg, transparent 230deg),
-                
-                /* This base gradient forces the top half to be vibrant yellow/gold and the bottom half to be very dark gold */
-                linear-gradient(to bottom, #ffe875 0%, #fced4e 45%, #695105 55%, #382501 100%);
-                
+            background-image: linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 45%), linear-gradient(225deg, rgba(0,0,0,0.35) 0%, transparent 55%), conic-gradient(from 145deg at 75% 25%, #cfa81f 0deg, #ffd952 50deg, #594202 120deg, transparent 190deg), conic-gradient(from 215deg at 35% 65%, #b59210 0deg, #402e01 80deg, #ffeba3 140deg, transparent 220deg), conic-gradient(from 55deg at 85% 50%, #9e7a0d 0deg, #fff085 60deg, #302200 140deg, transparent 200deg), conic-gradient(from 290deg at 20% 30%, #302200 0deg, #ebd05b 70deg, #876707 150deg, transparent 230deg), linear-gradient(to bottom, #ffe875 0%, #fced4e 45%, #695105 55%, #382501 100%);
             background-blend-mode: overlay, normal, multiply, overlay, soft-light, normal, normal;
             background-size: 100% 100%;
-            
             clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 88%, 50% 100%, 0% 88%);
             display: flex;
             flex-direction: column;
@@ -124,23 +115,21 @@
             top: 0; left: 0; right: 0; bottom: 0;
             background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.6) 42%, rgba(255, 248, 194, 0.7) 48%, transparent 56%);
             background-size: 280% 280%;
-            background-position: 170% 170%;
+            background-position: var(--gloss-x, 170%) var(--gloss-y, 170%);
             mix-blend-mode: color-dodge;
-            z-index: 3; 
+            z-index: 3;
             pointer-events: none;
             transition: background-position 0.15s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        /* FIXED SPACE ENGINE: Tightened height to 135px to pull the upper modules up and clear room for blocks below */
         .card-top {
             display: flex;
             height: 135px;
             width: 100%;
             margin-top: 5px;
             position: relative;
-            z-index: 4; 
+            z-index: 4;
         }
-
         .badge-ovr {
             display: flex;
             flex-direction: column;
@@ -163,16 +152,6 @@
         }
 
         .pos-txt { font-size: 13px; font-weight: 900; text-transform: uppercase; color: #050401; }
-
-        .flag-img {
-            width: 24px;
-            height: 15px;
-            object-fit: cover;
-            border: 1px solid rgba(0, 0, 0, 0.25);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin: 2px 0;
-        }
-
         .club-icon { width: 20px; height: 20px; opacity: 0.85; margin-top: 2px; }
 
         .avatar-placeholder {
@@ -182,6 +161,7 @@
             align-items: flex-end;
             overflow: hidden;
             z-index: 4;
+            height: 100%;
         }
 
         .avatar-placeholder svg, .avatar-placeholder img {
@@ -191,7 +171,7 @@
             object-fit: contain;
             object-position: bottom center;
         }
-        /* RESOLVED STACK: Encasing container utilizing zero negative overrides */
+
         .name-box {
             display: flex;
             justify-content: center;
@@ -200,7 +180,6 @@
             margin: 0 auto;                  
             padding: 4px 0;
             z-index: 4;
-            
             background-color: var(--stat-panel-bg); 
             border: 2px solid var(--stat-box-border); 
             border-radius: 8px;
@@ -210,18 +189,16 @@
 
         .player-name {
             text-align: center;
-            font-family: "Arial Black", -apple-system, sans-serif;
-            font-size: 20px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: -0.5px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.2px;
             margin: 0;
             padding: 3px 10px;
-            color: #ffd84a; 
-            text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.8);
+            color: #ffffff; /* Premium white */
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95); /* Deep shadow shield */
         }
 
-        /* RESOLVED ALIGNMENT: Widened box sits completely within bottom boundaries with zero squish risk */
         .stats-grid {
             display: flex;
             justify-content: space-between;
@@ -280,7 +257,7 @@
         }
 
         /* --- CONTROL PANEL SIDEBAR --- */
-        .controls-panel { display: flex; flex-direction: column; gap: 14px; width: 320px; border-left: 1px solid #374151; padding-left: 30px; }
+        .controls-panel { display: flex; flex-direction: column; gap: 14px; width: 320px; border-left: 1px solid #374151; padding-left: 30px; max-height: 90vh; overflow-y: auto; }
         h2 { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin-top: 0; font-size: 24px; border-bottom: 1px solid #475569; padding-bottom: 8px; }
         .input-group { display: flex; flex-direction: column; gap: 4px; }
         label { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; font-weight: 600; color: #94a3b8; }
@@ -297,7 +274,6 @@
     </style>
 </head>
 <body>
-
 <div class="container">
     <div class="card-container">
         <div class="neon-border-wrapper" id="glowWrapper">
@@ -307,7 +283,8 @@
                         <div class="badge-ovr">
                             <span class="ovr-txt" id="cardOvr">85</span>
                             <span class="pos-txt" id="cardPos">CUE</span>
-                            <img src="https://wikimedia.org" class="flag-img" id="cardFlag" alt="Country Flag">
+                            <!-- Repaired secure text emoji node for GitHub cross-origin safety -->
+                            <span id="cardFlag" style="font-size: 22px; line-height: 1; margin: 4px 0; display: inline-block; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));">🇵🇹</span>
                             <svg class="club-icon" viewBox="0 0 100 100" xmlns="http://w3.org">
                                 <circle cx="50" cy="50" r="45" fill="#000"/><circle cx="50" cy="50" r="20" fill="#fff"/>
                             </svg>
@@ -320,22 +297,17 @@
                         </div>
                     </div>
                     
-                    <!-- ENCAPSULATED NAME BANNER LAYER -->
                     <div class="name-box">
-                        <div class="player-name" id="cardName">PLAYER NAME</div>
+                        <div class="player-name" id="cardName">Player Name</div>
                     </div>
                     
                     <div class="stats-grid" id="statsGridElement">
-                        <!-- Left Column (3 Stats) -->
                         <div class="stat-column">
                             <div class="stat-item"><span class="stat-val" id="cardAgg">85</span><span class="stat-label">AGG</span></div>
                             <div class="stat-item"><span class="stat-val" id="cardCtr">85</span><span class="stat-label">CTR</span></div>
                             <div class="stat-item"><span class="stat-val" id="cardSel">85</span><span class="stat-label">SEL</span></div>
                         </div>
-                        
                         <div class="stats-vertical-divider"></div>
-                        
-                        <!-- Right Column (3 Stats) -->
                         <div class="stat-column">
                             <div class="stat-item"><span class="stat-val" id="cardPot">85</span><span class="stat-label">POT</span></div>
                             <div class="stat-item"><span class="stat-val" id="cardSaf">85</span><span class="stat-label">SAF</span></div>
@@ -346,14 +318,13 @@
             </div>
         </div>
     </div>
-
-    <!-- Configuration Settings Sidebar Form Workspace Panel Controls -->
+    <!-- Configuration Settings Sidebar Controls -->
     <div class="controls-panel" id="adminPanel">
         <h2>Cueverse Card Editor</h2>
         
         <div class="input-group">
             <label for="nameInput">Player Name</label>
-            <input type="text" id="nameInput" value="PLAYER NAME" maxlength="14">
+            <input type="text" id="nameInput" value="Player Name" maxlength="14">
         </div>
 
         <div class="input-group">
@@ -411,6 +382,7 @@
         </div>
 
         <div class="input-group" style="margin-top: 10px; border-top: 1px solid #374151; padding-top: 15px;">
+            <button class="btn-upload" style="background-color: #3b82f6; margin-bottom: 10px;" onclick="downloadCardAsPNG()">Download Card Image (PNG)</button>
             <button class="btn-upload" style="background-color: #10b981;" onclick="generateBakedCode()" id="actionBtn">Copy Card Code Bundle</button>
         </div>
         
@@ -420,124 +392,130 @@
     </div>
 </div>
 <script>
-    const nameInput = document.getElementById('nameInput');
-    const countryInput = document.getElementById('countryInput');
-    const tierInput = document.getElementById('tierInput');
-    const imageLoader = document.getElementById('imageLoader');
-
+    // 1. DOM Target Configurations
     const cardName = document.getElementById('cardName');
     const cardFlag = document.getElementById('cardFlag');
     const cardInnerLayer = document.getElementById('cardInnerLayer');
     const avatarContainer = document.getElementById('avatarPlaceholder');
     const glowWrapper = document.getElementById('glowWrapper');
-
+    const nameInput = document.getElementById('nameInput');
+    const countryInput = document.getElementById('countryInput');
+    const tierInput = document.getElementById('tierInput');
+    const imageLoader = document.getElementById('imageLoader');
     const metrics = ['agg', 'ctr', 'sel', 'pot', 'saf', 'tem'];
 
     const flags = {
-        gb: "https://wikimedia.org",
-        us: "https://wikimedia.org",
-        br: "https://wikimedia.org",
-        de: "https://wikimedia.org",
-        pt: "https://wikimedia.org"
+        pt: "🇵🇹",
+        gb: "🇬🇧",
+        us: "🇺🇸",
+        br: "🇧🇷",
+        de: "🇩🇪"
     };
 
+    // 2. Interactive Tilt Controller
     glowWrapper.addEventListener('mousemove', (e) => {
         const rect = glowWrapper.getBoundingClientRect();
         const x = e.clientX - rect.left; 
         const y = e.clientY - rect.top; 
-        
         const rotateX = ((y / rect.height) - 0.5) * -28; 
         const rotateY = ((x / rect.width) - 0.5) * 28;
-        
         glowWrapper.style.transform = `scale(1.14) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        
         const glossX = (x / rect.width) * 100;
         const glossY = (y / rect.height) * 100;
-        
-        const targetInnerRule = Array.from(document.styleSheets.cssRules).find(r => r.selectorText === '.card-inner::after');
-        if(targetInnerRule) {
-            targetInnerRule.style.backgroundPosition = `${100 - glossX}% ${100 - glossY}%`;
-        }
+        cardInnerLayer.style.setProperty('--gloss-x', `${100 - glossX}%`);
+        cardInnerLayer.style.setProperty('--gloss-y', `${100 - glossY}%`);
     });
 
     glowWrapper.addEventListener('mouseleave', () => {
         glowWrapper.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
-        const targetInnerRule = Array.from(document.styleSheets.cssRules).find(r => r.selectorText === '.card-inner::after');
-        if(targetInnerRule) {
-            targetInnerRule.style.backgroundPosition = '170% 170%';
-        }
+        cardInnerLayer.style.setProperty('--gloss-x', '170%');
+        cardInnerLayer.style.setProperty('--gloss-y', '170%');
     });
 
+    // 3. Picture Pipeline Loader
     imageLoader.addEventListener('change', function(e) {
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            avatarContainer.innerHTML = '';
-            const img = document.createElement('img');
-            img.src = event.target.result;
-            avatarContainer.appendChild(img);
-        }
-        if(e.target.files && e.target.files) {
+        if (e.target.files && e.target.files) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                avatarContainer.innerHTML = '';
+                const img = document.createElement('img');
+                img.src = event.target.result;
+                img.style.cssText = "width: 90%; height: auto; max-height: 115px; object-fit: contain; object-position: bottom center;";
+                avatarContainer.appendChild(img);
+            };
             reader.readAsDataURL(e.target.files);
         }
     });
 
-    function updateCard() {
-        cardName.textContent = nameInput.value || "PLAYER NAME";
-        cardFlag.src = flags[countryInput.value];
-        
-        let total = 0;
-        metrics.forEach(m => {
-            const val = parseInt(document.getElementById(`${m}Input`).value) || 0;
-            total += val;
-            document.getElementById(`${m}Val`).textContent = val;
-            document.getElementById(`card${m.charAt(0).toUpperCase() + m.slice(1)}`).textContent = val;
-        });
-        document.getElementById('cardOvr').textContent = Math.round(total / 6);
-
-        if (tierInput.value === 'gold') {
+    // 4. Color Palette & Neon Border Switcher Engine
+    function applyTierTheming(selectedTier) {
+        if (selectedTier === 'gold') {
             document.documentElement.style.setProperty('--stat-box-border', '#946f02'); 
             document.documentElement.style.setProperty('--stat-panel-bg', 'rgba(30, 20, 1, 0.75)');
-            cardInnerLayer.style.backgroundImage = `
-                linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 45%),
-                linear-gradient(225deg, rgba(0,0,0,0.3) 0%, transparent 55%),
-                conic-gradient(from 145deg at 75% 25%, #cfa81f 0deg, #ffd952 50deg, #594202 120deg, transparent 190deg),
-                conic-gradient(from 215deg at 35% 65%, #b59210 0deg, #402e01 80deg, #ffeba3 140deg, transparent 220deg),
-                conic-gradient(from 55deg at 85% 50%, #9e7a0d 0deg, #fff085 60deg, #302200 140deg, transparent 200deg),
-                conic-gradient(from 290deg at 20% 30%, #302200 0deg, #ebd05b 70deg, #876707 150deg, transparent 230deg),
-                linear-gradient(to bottom, #ffe875 0%, #fced4e 45%, #695105 55%, #382501 100%)
-            `;
-        } else if (tierInput.value === 'silver') {
+            document.documentElement.style.setProperty('--neon-start', '#00f0ff');
+            document.documentElement.style.setProperty('--neon-mid', '#0066ff');
+            document.documentElement.style.setProperty('--neon-end', '#00f0ff');
+            cardInnerLayer.style.backgroundImage = `linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 45%), linear-gradient(225deg, rgba(0,0,0,0.3) 0%, transparent 55%), conic-gradient(from 145deg at 75% 25%, #cfa81f 0deg, #ffd952 50deg, #594202 120deg, transparent 190deg), conic-gradient(from 215deg at 35% 65%, #b59210 0deg, #402e01 80deg, #ffeba3 140deg, transparent 220deg), linear-gradient(to bottom, #ffe875 0%, #fced4e 45%, #695105 55%, #382501 100%)`;
+        } else if (selectedTier === 'silver') {
             document.documentElement.style.setProperty('--stat-box-border', '#475569'); 
             document.documentElement.style.setProperty('--stat-panel-bg', 'rgba(15, 23, 42, 0.65)');
-            cardInnerLayer.style.backgroundImage = `
-                linear-gradient(135deg, rgba(255,255,255,0.8) 0%, transparent 45%),
-                linear-gradient(225deg, rgba(0,0,0,0.2) 0%, transparent 55%),
-                conic-gradient(from 145deg at 75% 25%, #94a3b8 0deg, #ffffff 50deg, #475569 120deg, transparent 190deg),
-                conic-gradient(from 215deg at 35% 65%, #cbd5e1 0deg, #1e293b 80deg, #f8fafc 140deg, transparent 220deg),
-                conic-gradient(from 55deg at 85% 50%, #64748b 0deg, #ffffff 60deg, #0f172a 140deg, transparent 200deg),
-                conic-gradient(from 290deg at 20% 30%, #1e293b 0deg, #ffffff 70deg, #94a3b8 150deg, transparent 230deg),
-                linear-gradient(to bottom, #f1f5f9 0%, #cbd5e1 45%, #334155 55%, #0f172a 100%)
-            `;
-        } else if (tierInput.value === 'bronze') {
+            document.documentElement.style.setProperty('--neon-start', '#cbd5e1');
+            document.documentElement.style.setProperty('--neon-mid', '#475569');
+            document.documentElement.style.setProperty('--neon-end', '#cbd5e1');
+            cardInnerLayer.style.backgroundImage = `linear-gradient(135deg, rgba(255,255,255,0.8) 0%, transparent 45%), linear-gradient(225deg, rgba(0,0,0,0.2) 0%, transparent 55%), conic-gradient(from 145deg at 75% 25%, #94a3b8 0deg, #ffffff 50deg, #475569 120deg, transparent 190deg), conic-gradient(from 215deg at 35% 65%, #cbd5e1 0deg, #1e293b 80deg, #f8fafc 140deg, transparent 220deg), linear-gradient(to bottom, #f1f5f9 0%, #cbd5e1 45%, #334155 55%, #0f172a 100%)`;
+        } else if (selectedTier === 'bronze') {
             document.documentElement.style.setProperty('--stat-box-border', '#451a03'); 
             document.documentElement.style.setProperty('--stat-panel-bg', 'rgba(43, 17, 2, 0.7)');
-            cardInnerLayer.style.backgroundImage = `
-                linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 45%),
-                linear-gradient(225deg, rgba(0,0,0,0.4) 0%, transparent 55%),
-                conic-gradient(from 145deg at 75% 25%, #b45309 0deg, #ffedd5 50deg, #451a03 120deg, transparent 190deg),
-                conic-gradient(from 215deg at 35% 65%, #d97706 0deg, #2b1102 80deg, #fed7aa 140deg, transparent 220deg),
-                conic-gradient(from 55deg at 85% 50%, #431407 0deg, #fde68a 60deg, #0c0400 140deg, transparent 220deg),
-                conic-gradient(from 290deg at 20% 30%, #0c0400 0deg, #b45309 70deg, #451a03 150deg, transparent 230deg),
-                linear-gradient(to bottom, #ffedd5 0%, #fed7aa 45%, #451a03 55%, #1c0a00 100%)
-            `;
+            document.documentElement.style.setProperty('--neon-start', '#d97706');
+            document.documentElement.style.setProperty('--neon-mid', '#451a03');
+            document.documentElement.style.setProperty('--neon-end', '#d97706');
+            cardInnerLayer.style.backgroundImage = `linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 45%), linear-gradient(225deg, rgba(0,0,0,0.4) 0%, transparent 55%), conic-gradient(from 145deg at 75% 25%, #b45309 0deg, #ffedd5 50deg, #451a03 120deg, transparent 190deg), conic-gradient(from 215deg at 35% 65%, #d97706 0deg, #2b1102 80deg, #fed7aa 140deg, transparent 220deg), linear-gradient(to bottom, #ffedd5 0%, #fed7aa 45%, #451a03 55%, #1c0a00 100%)`;
         }
     }
 
+    // 5. Dynamic Sync Form Values & Compute Rounded Card OVR
+    function updateCard() {
+        // Natural typography preservation without upper casing filters
+        cardName.textContent = nameInput.value || "Player Name";
+        cardFlag.textContent = flags[countryInput.value];
+        let totalStatsValue = 0;
+        metrics.forEach(m => {
+            const val = parseInt(document.getElementById(`${m}Input`).value) || 0;
+            totalStatsValue += val;
+            document.getElementById(`${m}Val`).textContent = val;
+            document.getElementById(`card${m.charAt(0).toUpperCase() + m.slice(1)}`).textContent = val;
+        });
+        document.getElementById('cardOvr').textContent = Math.round(totalStatsValue / metrics.length);
+        applyTierTheming(tierInput.value);
+    }
+
+    // 6. High-Quality Image Exporter Canvas Generation
+    function downloadCardAsPNG() {
+        const cardTargetNode = document.getElementById('cardElement');
+        const sanitisedFilename = nameInput.value.trim().replace(/\s+/g, '_') || 'player';
+        glowWrapper.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
+        
+        html2canvas(cardTargetNode, { useCORS: true, scale: 2, backgroundColor: null }).then(canvas => {
+            const anchorLinkTrigger = document.createElement('a');
+            anchorLinkTrigger.download = `cueverse_${sanitisedFilename.toLowerCase()}_card.png`;
+            anchorLinkTrigger.href = canvas.toDataURL('image/png');
+            anchorLinkTrigger.click();
+        }).catch(err => {
+            console.error('Canvas processing warning thrown:', err);
+        });
+    }
+
+    // 7. Bundle Compiler
     function generateBakedCode() {
-        const stylesBlock = document.getElementsByTagName('style').outerHTML;
-        const cardStructureHTML = document.querySelector('.card-container').innerHTML;
-        const bakedHtmlPage = `<!DOCTYPE html><html lang="en"><head>${stylesBlock}</head><body style="background:#02040a; display:flex; justify-content:center; align-items:center; min-height:100vh;">${cardStructureHTML}</body></html>`;
-        navigator.clipboard.writeText(bakedHtmlPage).then(() => {
+        const primaryStyles = document.getElementById('themeStylesheet').outerHTML;
+        const coreCardStructure = document.querySelector('.card-container').innerHTML;
+        const finalCompiledPayload = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">${primaryStyles}</head><body style="background:#02040a; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0;">${coreCardStructure}</body></html>`;
+        const codeBox = document.getElementById('codeBox');
+        const outputArea = document.getElementById('outputArea');
+        codeBox.value = finalCompiledPayload;
+        outputArea.style.display = 'block';
+
+        navigator.clipboard.writeText(finalCompiledPayload).then(() => {
             const btn = document.getElementById('actionBtn');
             btn.textContent = "COPIED TO CLIPBOARD! ✓";
             btn.style.backgroundColor = "#059669";
@@ -547,7 +525,6 @@
 
     [nameInput, countryInput, tierInput].forEach(el => el.addEventListener('input', updateCard));
     metrics.forEach(m => document.getElementById(`${m}Input`).addEventListener('input', updateCard));
-
     updateCard();
 </script>
 </body>
