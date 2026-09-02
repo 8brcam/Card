@@ -421,7 +421,7 @@ box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55);
     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; width: 100%;">
         <div style="background-color: rgba(16, 185, 129, 0.05); border: 1px solid #10b981; padding: 15px; border-radius: 10px; text-align: center;">
             <div class="micro-card-shield badge-micro-champ"></div>
-            <div style="font-size: 13px; font-weight: 800; color: #10b981; text-transform: uppercase; font-family: -apple-system, sans-serif;">Reigning Champion</div>
+            <div style="font-size: 13px; font-weight: 800; color: #10b981; text-transform: uppercase; font-family: -apple-system, sans-serif;">Previous Competition Winner 🏆</div>
             <div style="font-size: 12px; font-weight: 600; color: #94a3b8; margin-top: 4px; font-family: -apple-system, sans-serif;">Title Holder</div>
         </div>
         <div style="background-color: rgba(30, 64, 175, 0.1); border: 1px solid #1d4ed8; padding: 15px; border-radius: 10px; text-align: center;">
@@ -1034,6 +1034,292 @@ box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55);
     <!-- Card Slot 3 -->
     <div class="card-slot-box">
         <!-- PASTE YOUR THIRD FULL COPIED CARD CODE BUNDLE DIRECTLY BELOW THIS LINE -->
+        <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><style id="themeStylesheet">
+        :root {
+            --bg-color: #02040a;
+            --panel-bg: #0b0f19;
+            --text-color: #f8fafc;
+            --card-text: #050401;
+            /* Dynamic Default Variable Anchors */
+            --stat-box-border: #946f02;
+            --stat-panel-bg: rgba(30, 20, 1, 0.75);
+            --neon-start: #00f0ff;
+            --neon-mid: #0066ff;
+            --neon-end: #00f0ff;
+        }
+
+        body {
+            font-family: "Arial Black", -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            gap: 40px;
+            background-color: var(--panel-bg);
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            max-width: 900px;
+            width: auto;
+            transition: all 0.3s ease;
+        }
+        /* --- THE SHIELD PERSPECTIVE ARCHITECTURE --- */
+        .card-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1500px;
+        }
+
+        .neon-border-wrapper {
+            position: relative;
+            width: 278px;
+            height: 398px;
+            background: linear-gradient(135deg, var(--neon-start) 0%, var(--neon-mid) 50%, var(--neon-end) 100%);
+            background-size: 200% 200%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: neonPulse 4s linear infinite;
+            transform-style: preserve-3d;
+            transition: transform 0.15s ease-out;
+            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 88%, 50% 100%, 0% 88%);
+        }
+
+        .fut-card {
+            position: relative;
+            width: 272px;
+            height: 392px;
+            display: flex;
+            flex-direction: column;
+            padding: 3px;
+            box-sizing: border-box;
+            z-index: 2;
+            transform: translateZ(35px);
+            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 88%, 50% 100%, 0% 88%);
+        }
+
+        @keyframes neonPulse {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background-blend-mode: overlay, normal, multiply, overlay, soft-light, normal, normal;
+            background-size: 100% 100%;
+            clip-path: polygon(0% 8%, 20% 0%, 50% 3%, 80% 0%, 100% 8%, 100% 88%, 50% 100%, 0% 88%);
+            display: flex;
+            flex-direction: column;
+            padding: 24px 12px 15px 12px;
+            box-sizing: border-box;
+            z-index: 2;
+        }
+
+        .card-inner::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(105deg, transparent 30%, rgba(255, 255, 255, 0.6) 42%, rgba(255, 248, 194, 0.7) 48%, transparent 56%);
+            background-size: 280% 280%;
+            background-position: var(--gloss-x, 170%) var(--gloss-y, 170%);
+            mix-blend-mode: color-dodge;
+            z-index: 3;
+            pointer-events: none;
+            transition: background-position 0.15s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .card-top {
+            display: flex;
+            height: 135px;
+            width: 100%;
+            margin-top: 5px;
+            position: relative;
+            z-index: 4;
+        }
+
+        .badge-ovr {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 25%;
+            gap: 2px;
+            padding-top: 5px;
+            border-right: 1px solid rgba(0, 0, 0, 0.08);
+            z-index: 4;
+        }
+
+        .ovr-txt {
+            font-size: 46px;
+            font-weight: 900;
+            line-height: 38px;
+            letter-spacing: -2px;
+            color: var(--card-text);
+            /* Contrast Fix: Crisply offsets light and dark backdrops simultaneously */
+            text-shadow: 
+                -1px -1px 0px rgba(255, 255, 255, 0.4),
+                 1px -1px 0px rgba(255, 255, 255, 0.4),
+                -1px  1px 0px rgba(255, 255, 255, 0.4),
+                 1px  1px 0px rgba(255, 255, 255, 0.4),
+                 0px  2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .pos-txt { font-size: 13px; font-weight: 900; text-transform: uppercase; color: var(--card-text); }
+        .club-icon { width: 20px; height: 20px; opacity: 0.85; margin-top: 2px; }
+        
+        /* UPGRADED IMAGE SIZE: Widens photo footprint and drops it flat on the name bar line */
+        .avatar-placeholder {
+            width: 85%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            overflow: hidden;
+            z-index: 4;
+            height: 100%;
+        }
+        
+        .avatar-placeholder svg, .avatar-placeholder img {
+            width: 100%;
+            height: auto;
+            max-height: 145px;
+            object-fit: contain;
+            object-position: center bottom;
+        }
+
+        .name-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 92%;                       
+            margin: 15px auto 0 auto;
+            padding: 4px 0;
+            z-index: 4;
+            background-color: var(--stat-panel-bg); 
+            border: 2px solid var(--stat-box-border); 
+            border-radius: 8px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
+            box-sizing: border-box;
+        }
+        
+        .player-name {
+            text-align: center;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.2px;
+            margin: 0;
+            padding: 3px 10px;
+            color: #ffffff; 
+            text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.95); 
+        }
+
+        .stats-grid {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;       
+            width: 92%;               
+            margin: 14px auto 0 auto;
+            z-index: 4; 
+            background-color: var(--stat-panel-bg);
+            border-radius: 8px;
+            border: 2px solid var(--stat-box-border); 
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.55);
+            box-sizing: border-box;
+        }
+
+        .stat-column { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+        .stat-item { display: flex; align-items: center; justify-content: flex-start; gap: 10px; line-height: 1.1; width: 100%; }
+        .stat-val { font-size: 22px; font-weight: 900; color: #fff; width: 32px; text-align: left; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+        .stat-label { font-size: 15px; font-weight: 800; color: #ffd84a; text-transform: uppercase; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+        .stats-vertical-divider { width: 2px; height: 68px; background-color: var(--stat-box-border); opacity: 0.75; margin: 0 8px; border-radius: 1px; }
+
+        /* --- CONTROL PANEL SIDEBAR --- */
+        .controls-panel { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 14px; 
+            width: 320px; 
+            border-left: 1px solid #374151; 
+            padding-left: 30px; 
+            max-height: 90vh; 
+            overflow-y: auto; 
+        }
+        
+        h2 { font-family: -apple-system, BlinkMacSystemFont, sans-serif; margin-top: 0; font-size: 24px; border-bottom: 1px solid #475569; padding-bottom: 8px; }
+        .input-group { display: flex; flex-direction: column; gap: 4px; }
+        .checkbox-group { display: flex; flex-direction: row; align-items: center; gap: 10px; margin: 5px 0; }
+        .checkbox-group input { width: 18px; height: 18px; accent-color: #10b981; cursor: pointer; }
+        label { font-family: -apple-system, BlinkMacSystemFont, sans-serif; font-size: 13px; font-weight: 600; color: #94a3b8; }
+        input[type="text"], select, textarea { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background-color: #0f172a; border: 1px solid #475569; color: #fff; padding: 8px 12px; border-radius: 6px; font-size: 15px; outline: none; }
+        .btn-upload { font-family: -apple-system, BlinkMacSystemFont, sans-serif; color: white; border: none; padding: 10px 14px; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; text-align: center; transition: background-color 0.2s; }
+        .slider-row { display: flex; align-items: center; gap: 12px; }
+        input[type="range"] { flex: 1; accent-color: #dca021; cursor: pointer; }
+        .slider-val { width: 30px; text-align: right; font-weight: 700; font-size: 15px; }
+        optgroup { background-color: #0f172a; color: #94a3b8; font-style: normal; }
+
+        @media (max-width: 768px) {
+            .container { flex-direction: column; align-items: center; }
+            .controls-panel { width: 100%; border-left: none; border-top: 1px solid #374151; padding-left: 0; padding-top: 20px; }
+        }
+    </style></head><body style="background:#02040a; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; overflow:hidden;"><div class="card-container" style="perspective: 1500px; display: flex; justify-content: center; align-items: center; width: 100%; height: 100vh;">
+        <!-- Outer Glowing Geometric Frame Wrapper -->
+        <div class="neon-border-wrapper" id="glowWrapper" style="transform: scale(1) rotateX(0deg) rotateY(0deg);">
+            <div class="fut-card" id="cardElement">
+                <!-- Multi-layered Foil Composite Face -->
+                <div class="card-inner" id="cardInnerLayer" style="background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.45) 0%, transparent 40%), linear-gradient(225deg, rgba(16, 185, 129, 0.3) 0%, transparent 60%), conic-gradient(from 145deg at 75% 25%, rgb(4, 120, 87) 0deg, rgb(52, 211, 153) 50deg, rgb(2, 44, 34) 120deg, transparent 190deg), conic-gradient(from 215deg at 35% 65%, rgb(5, 150, 105) 0deg, rgb(2, 44, 34) 80deg, rgb(167, 243, 208) 140deg, transparent 220deg), linear-gradient(rgb(17, 24, 39) 0%, rgb(6, 78, 59) 45%, rgb(2, 44, 34) 55%, rgb(2, 44, 34) 100%); --gloss-x: 170%; --gloss-y: 170%;">
+                    
+                    <div class="card-top">
+                        <div class="badge-ovr">
+                            <span class="ovr-txt" id="cardOvr">86</span>
+                            <span class="pos-txt" id="cardPos">CUE</span>
+                            <span id="cardFlag" style="font-size: 22px; line-height: 1; margin: 4px 0; display: inline-block; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.3));">🇬🇧</span>
+                            <svg class="club-icon" viewBox="0 0 100 100" xmlns="http://w3.org">
+                                <circle cx="50" cy="50" r="45" fill="#000"></circle><circle cx="50" cy="50" r="20" fill="#fff"></circle>
+                            </svg>
+                        </div>
+                        <div class="avatar-placeholder" id="avatarPlaceholder"><img src="data:image/webp;base64,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" style="width: 100%; height: auto; max-height: 145px; object-fit: contain; object-position: center bottom; z-index: 4; position: relative;"></div>
+                    </div>
+                    
+                    <div class="name-box">
+                        <div class="player-name" id="cardName">mvp_sicc</div>
+                    </div>
+                    
+                    <div class="stats-grid" id="statsGridElement">
+                        <div class="stat-column">
+                            <div class="stat-item"><span class="stat-val" id="cardAgg">84</span><span class="stat-label">AGG</span></div>
+                            <div class="stat-item"><span class="stat-val" id="cardCtr">83</span><span class="stat-label">CTR</span></div>
+                            <div class="stat-item"><span class="stat-val" id="cardSel">87</span><span class="stat-label">SEL</span></div>
+                        </div>
+                        <div class="stats-vertical-divider"></div>
+                        <div class="stat-column">
+                            <div class="stat-item"><span class="stat-val" id="cardPot">89</span><span class="stat-label">POT</span></div>
+                            <div class="stat-item"><span class="stat-val" id="cardSaf">85</span><span class="stat-label">SAF</span></div>
+                            <div class="stat-item"><span class="stat-val" id="cardTem">90</span><span class="stat-label">TEM</span></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div><script> const wrapper = document.querySelector('.neon-border-wrapper'); const inner = document.querySelector('.card-inner'); if (wrapper && inner) { wrapper.addEventListener('mousemove', (e) => { const rect = wrapper.getBoundingClientRect(); const x = e.clientX - rect.left; const y = e.clientY - rect.top; wrapper.style.transform = 'scale(1.14) rotateX(' + (((y / rect.height) - 0.5) * -28) + 'deg) rotateY(' + (((x / rect.width) - 0.5) * 28) + 'deg)'; inner.style.setProperty('--gloss-x', (100 - (x / wrapper.offsetWidth) * 100) + '%'); inner.style.setProperty('--gloss-y', (100 - (y / wrapper.offsetHeight) * 100) + '%'); }); wrapper.addEventListener('mouseleave', () => { wrapper.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)'; inner.style.setProperty('--gloss-x', '170%'); inner.style.setProperty('--gloss-y', '170%'); }); } </script>
+</body></html>
     </div>
 
     <!-- Card Slot 4 -->
